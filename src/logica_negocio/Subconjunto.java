@@ -8,53 +8,54 @@ public class Subconjunto {
 	//variables de instancia
 	private Set<Oferta> _conjOfertas;
 	private Double _dineroTotal;// hay q cambiar el tipo de dato bigdecimal o long
-	private Double _beneficioTotal;
+	private Double _tiempoTotal;
 	
 	//constructor
 	public Subconjunto(){
 		_conjOfertas=new HashSet<Oferta>();
 		_dineroTotal=0.0;
-		_beneficioTotal=0.0;
+		_tiempoTotal=0.0;
 	}
 	
 	//agregar elementos
 	public void agregarOfertas(Oferta oferta){
+//		if(!oferta.getFranjaHoraria().superposicionHoraria(otraFranja)) aun no c con q compararlo
 		_dineroTotal+=oferta.getDinero();//peso total O(1)
-		_beneficioTotal+=oferta.getBeneficio();//O(1)
+		_tiempoTotal+=oferta.getFranjaHoraria().getTiempo();//O(1)
 		_conjOfertas.add(oferta);
 	}
 	
 	//agregar elementos
 	public void quitarOfertas(Oferta oferta){
+//		if(!oferta.getFranjaHoraria().superposicionHoraria(otraFranja)) aun no c con q compararlo
 		_dineroTotal-=oferta.getDinero();//peso total O(1)
-		_beneficioTotal-=oferta.getBeneficio();//O(1)
+		_tiempoTotal-=oferta.getFranjaHoraria().getTiempo();//O(1)
 		_conjOfertas.remove(oferta);
 	}
 	
-	//mejor beneficio entre subconjuntos
-	public boolean mayorBeneficioQue(Subconjunto otro){
-		return this.getBeneficioTotal()>otro.getBeneficioTotal();
-	}
-	
-	//lectura protegida
-	public Double getBeneficioTotal(){
-		return _beneficioTotal;
-	}
-	
-	//mejor peso entre subconjuntos
+	//mejor ganancia entre subconjuntos
 	public boolean mayorDineroQue(Subconjunto otro){
 		return this.getDineroTotal()>otro.getDineroTotal();
 	}
-	
+		
 	//lectura protegida
 	public Double getDineroTotal(){
 		return _dineroTotal;
 	}
-		
+	
+	//mejor tiempo entre subconjuntos
+	public boolean mayorTiempoQue(Subconjunto otro){
+		return this.getTiempoTotal()>otro.getTiempoTotal();
+	}
+	
+	//lectura protegida
+	public Double getTiempoTotal(){
+		return _tiempoTotal;
+	}
+			
 	//equals
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj){
 		if (this == obj){
 			return true;
 		}
@@ -102,7 +103,7 @@ public class Subconjunto {
 	public String toString()
 	{
 		return "Subconjunto [conjuntoOfertas=" + _conjOfertas
-				+ ", dinero total=" + _dineroTotal + ", beneficioTotal="
-				+ _beneficioTotal + "]";
+				+ ", dinero total=" + _dineroTotal + ", tiempoTotal="
+				+ _tiempoTotal + "]";
 	}
 }

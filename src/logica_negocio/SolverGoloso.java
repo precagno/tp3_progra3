@@ -20,8 +20,8 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		Subconjunto subconjunto=new Subconjunto();
 		ArrayList<Oferta> ofertasOrdenadas=this.ordenarOfertas(instancia);
 		for (Oferta oferta : ofertasOrdenadas) {
-			if(oferta.getDinero()+subconjunto.getDineroTotal()
-			             <= instancia.getTiempoTotal()){//si no me paso del peso maximo
+			if(oferta.getFranjaHoraria().getTiempo() + subconjunto.getTiempoTotal() <= instancia.getTiempoMaximo()){//si no me paso del tiempo maximo
+
 				subconjunto.agregarOfertas(oferta);//agrego el elemento al conjunto solucion
 			}
 		}

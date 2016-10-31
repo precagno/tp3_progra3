@@ -5,7 +5,7 @@ public class FranjaHoraria {
 	//variables de instancia
 	private int _horaInicio;//aca hay que pensarlo mas, vamos a hacer horas enteras
 	private int _horaFin;// o puede arrancar en mitad de horas?????
-	private int _tiempo;//cre q la mejor opcion seria hacerlo long en minutos
+	private int _tiempo;//creo q la mejor opcion seria hacerlo long en minutos
 	
 	//constructor
 	public FranjaHoraria(int horaInicio, int tiempo, int horaFin){
@@ -15,7 +15,7 @@ public class FranjaHoraria {
 	}
 	
 	//cargado de parametros
-	public void setHorarioInicio(int hora){
+	public void setHoraInicio(int hora){
 		_horaInicio=hora;
 	}
 	
@@ -23,7 +23,7 @@ public class FranjaHoraria {
 		_tiempo=tiempo;
 	}
 	
-	public void setHorarioFin(int hora){
+	public void setHoraFin(int hora){
 		_horaFin=hora;
 	}
 	
@@ -62,15 +62,21 @@ public class FranjaHoraria {
 		return false;
 	}
 	
-	// CompareTo esto deberia ir en comparador pero aun no inserte la franja horarria a la clase oferta
-	//@Override
-	public int compareTo(FranjaHoraria otraFranja){
-		if(this.getTiempo()< otraFranja.getTiempo()){
-			return 1;
-		}
-		if (this.getTiempo()> otraFranja.getTiempo()){
-			return -1;
-		}
-		return 0;
-	}	
+//	// CompareTo esto deberia ir en comparador pero aun no inserte la franja horarria a la clase oferta
+//	//@Override
+//	public int compareTo(FranjaHoraria otraFranja){
+//		if(this.getTiempo()< otraFranja.getTiempo()){
+//			return 1;
+//		}
+//		if (this.getTiempo()> otraFranja.getTiempo()){
+//			return -1;
+//		}
+//		return 0;
+//	}
+	
+	//representacion
+	@Override
+	public String toString(){
+		return "("+this.getHoraInicio()+"["+this.getTiempo()+" Hrs]"+this.getHoraFin()+")";
+	}
 }

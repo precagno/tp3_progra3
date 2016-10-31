@@ -8,13 +8,15 @@ public class Oferta {
 	private String _oferente;
 	//private BigDecimal _dinero = new BigDecimal("1.00");  despues lo vemos
 	private Double _dinero;
-	private Double _beneficio;
+	private FranjaHoraria _franjaHoraria;
+//	private Double _beneficio;
 	
 	//constructor
-	public Oferta(String nombre, Double dinero, Double beneficio){
+	public Oferta(String nombre, Double dinero, FranjaHoraria franjaHoraria){//Double beneficio
 		_oferente=nombre;
 		_dinero=dinero;
-		_beneficio=beneficio;
+		_franjaHoraria=franjaHoraria;
+		//_beneficio=beneficio;
 	}
 	
 	//cargado de parametros
@@ -26,9 +28,13 @@ public class Oferta {
 		_dinero = dinero;
 	}
 
-	public void setBeneficio(Double beneficio){
-		_beneficio = beneficio;
+	public void setFranjaHoraria(FranjaHoraria _franjaHoraria) {
+		this._franjaHoraria = _franjaHoraria;
 	}
+	
+//	public void setBeneficio(Double beneficio){
+//		_beneficio = beneficio;
+//	}
 	
 	//lectura protegida
 	public String getOferente(){
@@ -38,10 +44,14 @@ public class Oferta {
 	public Double getDinero(){
 		return _dinero;
 	}
-
-	public Double getBeneficio(){
-		return _beneficio;
+	
+	public FranjaHoraria getFranjaHoraria() {
+		return _franjaHoraria;
 	}
+	
+//	public Double getBeneficio(){
+//		return _beneficio;
+//	}
 	
 	//equals
 	@Override
@@ -56,12 +66,6 @@ public class Oferta {
 			return false;
 		}
 		Oferta otro=(Oferta)obj;
-		if(_beneficio==null&&otro._beneficio!=null){
-			return false;
-		}
-		else if(!_beneficio.equals(otro._beneficio)){
-			return false;
-		}
 		if(_oferente==null&&otro._oferente!=null){
 			return false;
 		}
@@ -74,12 +78,22 @@ public class Oferta {
 		else if(!_dinero.equals(otro._dinero)){
 			return false;
 		}
+		if(_franjaHoraria==null&&otro._franjaHoraria!=null){//se apoya en el equals de franjaHoraria
+			return false;
+		}
+		else if(!_franjaHoraria.equals(otro._franjaHoraria)){//incluye todos los parametros de franja horaria
+			return false;                                    
+		}
 		return true;
 	}
 	
 	//representacion
 	@Override
 	public String toString(){
-		return "Oferta [nombre=" + _oferente + ", dinero=" + _dinero + ", beneficio=" + _beneficio + "]";
+		return "Oferta [nombre=" + _oferente + ", dinero=" + _dinero + ", franjaHoraria=" + _franjaHoraria + "]";
 	}
+
+
+
+
 }
