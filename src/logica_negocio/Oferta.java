@@ -8,15 +8,13 @@ public class Oferta {
 	private String _oferente;
 	//private BigDecimal _dinero = new BigDecimal("1.00");  despues lo vemos
 	private Double _dinero;
-	private FranjaHoraria _franjaHoraria;
-//	private Double _beneficio;
+	private DemandaHoraria _demandaHoraria;
 	
 	//constructor
-	public Oferta(String nombre, Double dinero, FranjaHoraria franjaHoraria){//Double beneficio
+	public Oferta(String nombre, Double dinero, DemandaHoraria demandaHoraria){//Double beneficio
 		_oferente=nombre;
 		_dinero=dinero;
-		_franjaHoraria=franjaHoraria;
-		//_beneficio=beneficio;
+		_demandaHoraria=demandaHoraria;
 	}
 	
 	//cargado de parametros
@@ -28,13 +26,9 @@ public class Oferta {
 		_dinero = dinero;
 	}
 
-	public void setFranjaHoraria(FranjaHoraria _franjaHoraria) {
-		this._franjaHoraria = _franjaHoraria;
+	public void setDemandaHoraria(DemandaHoraria demandaHoraria) {
+		this._demandaHoraria = demandaHoraria;
 	}
-	
-//	public void setBeneficio(Double beneficio){
-//		_beneficio = beneficio;
-//	}
 	
 	//lectura protegida
 	public String getOferente(){
@@ -45,13 +39,9 @@ public class Oferta {
 		return _dinero;
 	}
 	
-	public FranjaHoraria getFranjaHoraria() {
-		return _franjaHoraria;
+	public DemandaHoraria getDemandaHoraria() {
+		return _demandaHoraria;
 	}
-	
-//	public Double getBeneficio(){
-//		return _beneficio;
-//	}
 	
 	//equals
 	@Override
@@ -78,10 +68,10 @@ public class Oferta {
 		else if(!_dinero.equals(otro._dinero)){
 			return false;
 		}
-		if(_franjaHoraria==null&&otro._franjaHoraria!=null){//se apoya en el equals de franjaHoraria
+		if(_demandaHoraria==null&&otro._demandaHoraria!=null){//se apoya en el equals de franjaHoraria
 			return false;
 		}
-		else if(!_franjaHoraria.equals(otro._franjaHoraria)){//incluye todos los parametros de franja horaria
+		else if(!_demandaHoraria.equals(otro._demandaHoraria)){//incluye todos los parametros de franja horaria
 			return false;                                    
 		}
 		return true;
@@ -90,10 +80,6 @@ public class Oferta {
 	//representacion
 	@Override
 	public String toString(){
-		return "Oferta [nombre=" + _oferente + ", dinero=" + _dinero + ", franjaHoraria=" + _franjaHoraria + "]";
+		return "Oferta [nombre=" + _oferente + ", dinero=" + _dinero + ", demandaHoraria=" + _demandaHoraria + "]";
 	}
-
-
-
-
 }

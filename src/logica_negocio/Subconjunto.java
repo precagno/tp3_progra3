@@ -21,7 +21,7 @@ public class Subconjunto {
 	public void agregarOfertas(Oferta oferta){
 //		if(!oferta.getFranjaHoraria().superposicionHoraria(otraFranja)) aun no c con q compararlo
 		_dineroTotal+=oferta.getDinero();//peso total O(1)
-		_tiempoTotal+=oferta.getFranjaHoraria().getTiempo();//O(1)
+		_tiempoTotal+=oferta.getDemandaHoraria().getTiempo();//O(1)
 		_conjOfertas.add(oferta);
 	}
 	
@@ -29,7 +29,7 @@ public class Subconjunto {
 	public void quitarOfertas(Oferta oferta){
 //		if(!oferta.getFranjaHoraria().superposicionHoraria(otraFranja)) aun no c con q compararlo
 		_dineroTotal-=oferta.getDinero();//peso total O(1)
-		_tiempoTotal-=oferta.getFranjaHoraria().getTiempo();//O(1)
+		_tiempoTotal-=oferta.getDemandaHoraria().getTiempo();//O(1)
 		_conjOfertas.remove(oferta);
 	}
 	

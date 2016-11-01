@@ -1,6 +1,6 @@
 package logica_negocio;
 
-public class FranjaHoraria {
+public class DemandaHoraria {
 
 	//variables de instancia
 	private int _horaInicio;//aca hay que pensarlo mas, vamos a hacer horas enteras
@@ -8,7 +8,7 @@ public class FranjaHoraria {
 	private int _tiempo;//creo q la mejor opcion seria hacerlo long en minutos
 	
 	//constructor
-	public FranjaHoraria(int horaInicio, int tiempo, int horaFin){
+	public DemandaHoraria(int horaInicio, int tiempo, int horaFin){
 		_horaInicio=horaInicio;
 		_tiempo=tiempo;
 		_horaFin=horaFin;
@@ -49,18 +49,18 @@ public class FranjaHoraria {
 		if(obj==null||getClass()!=obj.getClass()){
 			return false;
 		}
-		FranjaHoraria otra=(FranjaHoraria)obj;
+		DemandaHoraria otra=(DemandaHoraria)obj;
 		return this._horaInicio==otra._horaInicio && this._horaFin==otra._horaFin && this._tiempo==otra._tiempo;
 	}
 	
-	//previene una superposicion horaria de asignacion en un periodo de 24hrs
-	public boolean superposicionHoraria(FranjaHoraria otraFranja){
-		/*este metodo deberia entregar true si se pisan dos franjas o false si no lo hacen
-		  estuve pensando como hacerlo pero aun no me sierra la idea, para evitar agregar
-		  una oferta en una franja ya asignada y para despues intentar graficarla*/
-		
-		return false;
-	}
+//	//previene una superposicion horaria de asignacion en un periodo de 24hrs
+//	public boolean superposicionHoraria(FranjaHoraria otraFranja){
+//		/*este metodo deberia entregar true si se pisan dos franjas o false si no lo hacen
+//		  estuve pensando como hacerlo pero aun no me sierra la idea, para evitar agregar
+//		  una oferta en una franja ya asignada y para despues intentar graficarla*/
+//		
+//		return false;
+//	}
 	
 //	// CompareTo esto deberia ir en comparador pero aun no inserte la franja horarria a la clase oferta
 //	//@Override

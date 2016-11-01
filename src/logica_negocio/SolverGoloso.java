@@ -20,9 +20,10 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		Subconjunto subconjunto=new Subconjunto();
 		ArrayList<Oferta> ofertasOrdenadas=this.ordenarOfertas(instancia);
 		for (Oferta oferta : ofertasOrdenadas) {
-			if(oferta.getFranjaHoraria().getTiempo() + subconjunto.getTiempoTotal() <= instancia.getTiempoMaximo()){//si no me paso del tiempo maximo
+//			if(!oferta.getFranjaHoraria().superposicionHoraria(otraFranja)) aun no c con q compararlo
+			if(oferta.getDemandaHoraria().getTiempo() + subconjunto.getTiempoTotal() <= instancia.getTiempoMaximo()){//si no me paso del tiempo maximo
 
-				subconjunto.agregarOfertas(oferta);//agrego el elemento al conjunto solucion
+				subconjunto.agregarOfertas(oferta);//agrego la oferta al conjunto solucion
 			}
 		}
 		return subconjunto;
@@ -33,5 +34,14 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();//clon de una instancia
 		Collections.sort(ofertasOrdenadas,_comparador);
 		return ofertasOrdenadas;
+	}
+	
+	//previene una superposicion horaria de asignacion en un periodo de 24hrs
+	public boolean superposicionHoraria(DemandaHoraria otraDemanda){
+		/*este metodo deberia entregar true si se pisan dos franjas o false si no lo hacen
+		  estuve pensando como hacerlo pero aun no me sierra la idea, para evitar agregar
+		  una oferta en una franja ya asignada y para despues intentar graficarla*/
+			
+		return false;
 	}
 }
