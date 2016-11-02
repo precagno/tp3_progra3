@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +21,7 @@ public class DAOfertasTest {
 	private String jsonOfertasInexistente="src/modelo/ofertas_inexistente.json";
 	
 	@Before
+	@After
 	public void eliminarOfertas() throws IOException
 	{
 		this.borrarOfertas(this.jsonOfertas);
