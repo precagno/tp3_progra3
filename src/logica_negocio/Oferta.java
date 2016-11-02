@@ -80,6 +80,6 @@ public class Oferta {
 	//representacion
 	@Override
 	public String toString(){
-		return "Oferta [nombre=" + _oferente + ", dinero=" + _dinero + ", demandaHoraria=" + _demandaHoraria + "]";
+		return "Oferta [nombre=" + _oferente + ", dinero = $" + _dinero + ", demandaHoraria=" + _demandaHoraria + "]";
 	}
 }

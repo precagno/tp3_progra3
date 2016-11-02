@@ -35,13 +35,4 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		Collections.sort(ofertasOrdenadas,_comparador);
 		return ofertasOrdenadas;
 	}
-	
-	//previene una superposicion horaria de asignacion en un periodo de 24hrs
-	public boolean superposicionHoraria(DemandaHoraria otraDemanda){
-		/*este metodo deberia entregar true si se pisan dos franjas o false si no lo hacen
-		  estuve pensando como hacerlo pero aun no me sierra la idea, para evitar agregar
-		  una oferta en una franja ya asignada y para despues intentar graficarla*/
-			
-		return false;
-	}
 }

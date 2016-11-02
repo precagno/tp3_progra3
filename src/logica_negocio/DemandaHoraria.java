@@ -3,10 +3,10 @@ package logica_negocio;
 public class DemandaHoraria {
 
 	//variables de instancia
-	private int _horaInicio;//aca hay que pensarlo mas, vamos a hacer horas enteras
-	private int _horaFin;// o puede arrancar en mitad de horas?????
-	private int _tiempo;//creo q la mejor opcion seria hacerlo long en minutos
-	
+	private int _horaInicio;
+	private int _horaFin;
+	private int _tiempo;
+		
 	//constructor
 	public DemandaHoraria(int horaInicio, int tiempo, int horaFin){
 		_horaInicio=horaInicio;
@@ -53,30 +53,9 @@ public class DemandaHoraria {
 		return this._horaInicio==otra._horaInicio && this._horaFin==otra._horaFin && this._tiempo==otra._tiempo;
 	}
 	
-//	//previene una superposicion horaria de asignacion en un periodo de 24hrs
-//	public boolean superposicionHoraria(FranjaHoraria otraFranja){
-//		/*este metodo deberia entregar true si se pisan dos franjas o false si no lo hacen
-//		  estuve pensando como hacerlo pero aun no me sierra la idea, para evitar agregar
-//		  una oferta en una franja ya asignada y para despues intentar graficarla*/
-//		
-//		return false;
-//	}
-	
-//	// CompareTo esto deberia ir en comparador pero aun no inserte la franja horarria a la clase oferta
-//	//@Override
-//	public int compareTo(FranjaHoraria otraFranja){
-//		if(this.getTiempo()< otraFranja.getTiempo()){
-//			return 1;
-//		}
-//		if (this.getTiempo()> otraFranja.getTiempo()){
-//			return -1;
-//		}
-//		return 0;
-//	}
-	
 	//representacion
 	@Override
 	public String toString(){
-		return "("+this.getHoraInicio()+"["+this.getTiempo()+" Hrs]"+this.getHoraFin()+")";
+		return "( inicio "+this.getHoraInicio()+"["+this.getTiempo()+" Hrs]"+" final "+this.getHoraFin()+")";
 	}
 }
