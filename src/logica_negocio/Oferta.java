@@ -1,12 +1,9 @@
 package logica_negocio;
 
-//import java.math.BigDecimal;    hay un problema de comparacion y otras cosas que tuve que regresar a Double
-
 public class Oferta {
 	
 	//variables de instancia
 	private String _oferente;
-	//private BigDecimal _dinero = new BigDecimal("1.00");  despues lo vemos
 	private Double _dinero;
 	private DemandaHoraria _demandaHoraria;
 	
