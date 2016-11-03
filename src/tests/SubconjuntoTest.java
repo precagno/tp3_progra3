@@ -58,6 +58,38 @@ public class SubconjuntoTest {
 		assertTrue(subconjunto.horaOcupada(23));
 	}
 	
+	@Test
+	public void superposicionHorariatest(){
+		Subconjunto subconjunto=new Subconjunto();
+	
+		Oferta oferta=listaOfertas().get(0);
+	
+		assertFalse(subconjunto.superposicionHoraria(oferta));
+		
+		subconjunto.agregarOfertas(oferta);
+		subconjunto.asignarTiempo(oferta);
+		
+		Oferta oferta2=listaOfertas().get(6);
+		
+		assertTrue(subconjunto.superposicionHoraria(oferta2));
+	}
+	
+	@Test
+	public void superposicionHorariaBordetest(){
+		Subconjunto subconjunto=new Subconjunto();
+	
+		Oferta oferta=listaOfertas().get(1);
+	
+		assertFalse(subconjunto.superposicionHoraria(oferta));
+		
+		subconjunto.agregarOfertas(oferta);
+		subconjunto.asignarTiempo(oferta);
+		
+		Oferta oferta2=listaOfertas().get(2);
+		
+		assertTrue(subconjunto.superposicionHoraria(oferta2));
+	}
+	
 	private ArrayList<Oferta> listaOfertas(){
 		ArrayList<Oferta> listaOfertas=new ArrayList<Oferta>();
 		
@@ -66,6 +98,8 @@ public class SubconjuntoTest {
 		listaOfertas.add(new Oferta("Joaquin Del Valle",1000.0,new DemandaHoraria(0,5,5)));
 		listaOfertas.add(new Oferta("Jose Evaristo Mendieta",400.0,new DemandaHoraria(15,6,21)));
 		listaOfertas.add(new Oferta("Enrique Bochini",600.0,new DemandaHoraria(21,3,24)));
+		listaOfertas.add(new Oferta("Javier Marenco",1200.0,new DemandaHoraria(21,3,24)));
+		listaOfertas.add(new Oferta("Patricia Heiner",600.0,new DemandaHoraria(11,2,13)));
 		
 		return listaOfertas;
 	}
