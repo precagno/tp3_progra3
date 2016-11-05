@@ -14,14 +14,16 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		_comparador=comparador;
 	}
 
-	//sobreescrito de la interface Solver, contrato de adecion
-	//agrega al subconjunto (posible solucion) una oferta
-	@Override
 	public Subconjunto resolver(Instancia instancia) {
 		Subconjunto subconjunto=new Subconjunto();
 		ArrayList<Oferta> ofertasOrdenadas=this.ordenarOfertas(instancia);
 		for (Oferta oferta : ofertasOrdenadas) {
-			if(subconjunto.superposicionHoraria(oferta)==false){//si la oferta entrante no se superpone con las ya realizadas
+			
+			int duracionOferta=oferta.getDemandaHoraria().getTiempo();
+			boolean noHaySuperposicion=subconjunto.superposicionHoraria(oferta)==false;
+			boolean menorQueUnDia=subconjunto.getTiempoTotal()+duracionOferta<=24;
+			
+			if(noHaySuperposicion && menorQueUnDia){//si la oferta entrante no se superpone con las ya realizadas
 				subconjunto.agregarOfertas(oferta);//agrego la oferta al conjunto solucion
 			}
 		}
