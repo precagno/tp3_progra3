@@ -34,7 +34,6 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 	ArrayList<Oferta> ordenarOfertas(Instancia instancia) {
 		ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();//clon de una instancia
 		Collections.sort(ofertasOrdenadas,_comparador);//ordena de < a >
-		//Collections.reverse(ofertasOrdenadas);//invierte el orden de > a <  de no ser necesario se quita
 		return ofertasOrdenadas;
 	}
 }
