@@ -3,6 +3,7 @@ package logica_negocio;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.junit.Test;
 
@@ -14,42 +15,29 @@ public class SolverGolosoTest {
 	@Test
 	public void ordenarPorTiempoTest() 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
-		Instancia instancia=InstanciaEjemplo.instanciaEjemploDos();
-		ArrayList<Oferta> listaOfertasOrdenada=solver.ordenarOfertas(instancia);
-		
-		//(Pedro Albornoz,Ernesto Bauman,Cesar Pitrola,Juan Alboran)
-		assertEquals(instancia.getOferta(2).getOferente(),listaOfertasOrdenada.get(0).getOferente());
-		assertEquals(instancia.getOferta(1).getOferente(),listaOfertasOrdenada.get(1).getOferente());
-		assertEquals(instancia.getOferta(3).getOferente(),listaOfertasOrdenada.get(2).getOferente());
-		assertEquals(instancia.getOferta(0).getOferente(),listaOfertasOrdenada.get(3).getOferente());	
+		testearOrden(Comparador.porTiempo(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{2,1,3,0});
 	}
 	
 	@Test
 	public void ordenarPorCocienteTest() 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porCociente());
-		Instancia instancia=InstanciaEjemplo.instanciaEjemploDos();
-		ArrayList<Oferta> listaOfertasOrdenada=solver.ordenarOfertas(instancia);
-		
-		//(Ernesto Bauman,Juan Alboran,Cesar Pitrola,Pedro Albornoz)
-		assertEquals(instancia.getOferta(1).getOferente(),listaOfertasOrdenada.get(0).getOferente());
-		assertEquals(instancia.getOferta(0).getOferente(),listaOfertasOrdenada.get(1).getOferente());
-		assertEquals(instancia.getOferta(3).getOferente(),listaOfertasOrdenada.get(2).getOferente());
-		assertEquals(instancia.getOferta(2).getOferente(),listaOfertasOrdenada.get(3).getOferente());	
+		testearOrden(Comparador.porCociente(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{1,0,3,2});
 	}
 	
 	@Test
 	public void ordenarPorDineroTest() 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porDinero());
-		Instancia instancia=InstanciaEjemplo.instanciaEjemploDos();
-		ArrayList<Oferta> listaOfertasOrdenada=solver.ordenarOfertas(instancia);
 		
-		//(Ernesto Bauman,Juan Alboran,Cesar Pitrola,Pedro Albornoz)
-		assertEquals(instancia.getOferta(1).getOferente(),listaOfertasOrdenada.get(0).getOferente());
-		assertEquals(instancia.getOferta(0).getOferente(),listaOfertasOrdenada.get(1).getOferente());
-		assertEquals(instancia.getOferta(3).getOferente(),listaOfertasOrdenada.get(2).getOferente());
-		assertEquals(instancia.getOferta(2).getOferente(),listaOfertasOrdenada.get(3).getOferente());	
+		testearOrden(Comparador.porDinero(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{1,0,3,2});	
+	}
+	
+	private void testearOrden(Comparator<Oferta> comparador,Instancia inst,int[] orden){
+		SolverGoloso solver=new SolverGoloso(comparador);
+		Instancia instancia=inst;
+		ArrayList<Oferta> listaOfertasOrdenada=solver.ordenarOfertas(inst);
+		
+		for(int i=0;i<orden.length;i++){
+			assertEquals(instancia.getOferta(orden[i]).getOferente(),listaOfertasOrdenada.get(i).getOferente());
+		}
 	}
 }
