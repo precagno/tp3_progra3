@@ -17,7 +17,7 @@ public class SubconjuntoTest {
 		assertFalse(subconjunto.horaOcupada(11));
 		assertFalse(subconjunto.horaOcupada(12));
 		
-		Oferta oferta=InstanciaEjemplo.listaOfertas().get(0);
+		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(0);
 		
 		subconjunto.agregarOfertas(oferta);
 		subconjunto.asignarTiempo(oferta);
@@ -34,7 +34,7 @@ public class SubconjuntoTest {
 		assertFalse(subconjunto.horaOcupada(1));
 		
 		
-		Oferta oferta=InstanciaEjemplo.listaOfertas().get(1);
+		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
 	
 		subconjunto.agregarOfertas(oferta);
 		subconjunto.asignarTiempo(oferta);
@@ -46,7 +46,7 @@ public class SubconjuntoTest {
 		assertFalse(subconjunto.horaOcupada(22));
 		assertFalse(subconjunto.horaOcupada(23));
 		
-		Oferta oferta2=InstanciaEjemplo.listaOfertas().get(4);
+		Oferta oferta2=InstanciaEjemplo.instanciaEjemploUno().getOferta(4);
 		
 		subconjunto.agregarOfertas(oferta2);
 		subconjunto.asignarTiempo(oferta2);
@@ -60,14 +60,14 @@ public class SubconjuntoTest {
 	public void superposicionHorariatest(){
 		Subconjunto subconjunto=new Subconjunto();
 	
-		Oferta oferta=InstanciaEjemplo.listaOfertas().get(0);
+		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(0);
 	
 		assertFalse(subconjunto.superposicionHoraria(oferta));
 		
 		subconjunto.agregarOfertas(oferta);
 		subconjunto.asignarTiempo(oferta);
 		
-		Oferta oferta2=InstanciaEjemplo.listaOfertas().get(6);
+		Oferta oferta2=InstanciaEjemplo.instanciaEjemploUno().getOferta(6);
 		
 		assertTrue(subconjunto.superposicionHoraria(oferta2));
 	}
@@ -76,17 +76,15 @@ public class SubconjuntoTest {
 	public void superposicionHorariaBordetest(){
 		Subconjunto subconjunto=new Subconjunto();
 	
-		Oferta oferta=InstanciaEjemplo.listaOfertas().get(1);
+		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
 	
 		assertFalse(subconjunto.superposicionHoraria(oferta));
 		
 		subconjunto.agregarOfertas(oferta);
 		subconjunto.asignarTiempo(oferta);
 		
-		Oferta oferta2=InstanciaEjemplo.listaOfertas().get(2);
+		Oferta oferta2=InstanciaEjemplo.instanciaEjemploUno().getOferta(2);
 		
 		assertTrue(subconjunto.superposicionHoraria(oferta2));
 	}
-	
-	
 }
