@@ -65,7 +65,7 @@ public class DAOfertasTest {
 		assertEquals(0, listaOfertas.size());
 	}
 	
-	/*---- Métodos auxiliares ----*/
+	/*---- Metodos auxiliares ----*/
 	private void borrarOfertas(String nombreArchivo) throws IOException
 	{
 		BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
@@ -77,9 +77,9 @@ public class DAOfertasTest {
 	{
 		ArrayList<Oferta> listaOfertas=new ArrayList<Oferta>();
 		
-		listaOfertas.add(new Oferta("Pedro Granes",900.0, new DemandaHoraria(0,3,18)));
-		listaOfertas.add(new Oferta("Eduardo Cicuti",200.0, new DemandaHoraria(5,4,9)));
-		listaOfertas.add(new Oferta("Armando Renya",800.0, new DemandaHoraria(10,7,17)));
+		listaOfertas.add(new Oferta("Pedro Granes",900.0, new DemandaHoraria(0,3)));//,18
+		listaOfertas.add(new Oferta("Eduardo Cicuti",200.0, new DemandaHoraria(5,4)));//,9
+		listaOfertas.add(new Oferta("Armando Renya",800.0, new DemandaHoraria(10,7)));//,17
 		
 		return listaOfertas;
 	}

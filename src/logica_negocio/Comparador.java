@@ -4,9 +4,12 @@ import java.util.Comparator;
 
 public class Comparador {
 
-	//sin constructor unifica comparadores
-	//comparador por oferta
-	public static Comparator<Oferta> porDinero(){//de > a <, -1 primero
+	/**sin constructor unifica comparadores
+	 * de distintos tipos de parametros de 
+	 * un objeto*/
+	
+	//comparador por dinero
+	public static Comparator<Oferta> porDinero(){
 		return new Comparator<Oferta>() {
 
 			@Override
@@ -22,8 +25,8 @@ public class Comparador {
 		};
 	}
 	
-	//comparador por beneficio
-	public static Comparator<Oferta> porTiempo(){//de > a <, -1 primero
+	//comparador por tiempo
+	public static Comparator<Oferta> porTiempo(){
 		return new Comparator<Oferta>(){
 
 			@Override
@@ -39,8 +42,8 @@ public class Comparador {
 		};
 	}
 	
-	//comparador por cociente
-	public static Comparator<Oferta> porCociente(){//de > a <, -1 primero
+	//comparador por cociente (dinero/tiempo)
+	public static Comparator<Oferta> porCociente(){
 		return new Comparator<Oferta>(){
 			public int compare(Oferta uno, Oferta otro){
 				double cocienteUno=uno.getDinero()/uno.getDemandaHoraria().getTiempo();

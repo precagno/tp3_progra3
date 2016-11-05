@@ -8,7 +8,7 @@ public class Oferta {
 	private DemandaHoraria _demandaHoraria;
 	
 	//constructor
-	public Oferta(String nombre, Double dinero, DemandaHoraria demandaHoraria){//Double beneficio
+	public Oferta(String nombre, Double dinero, DemandaHoraria demandaHoraria){
 		_oferente=nombre;
 		_dinero=dinero;
 		_demandaHoraria=demandaHoraria;
@@ -65,10 +65,10 @@ public class Oferta {
 		else if(!_dinero.equals(otro._dinero)){
 			return false;
 		}
-		if(_demandaHoraria==null&&otro._demandaHoraria!=null){//se apoya en el equals de franjaHoraria
+		if(_demandaHoraria==null&&otro._demandaHoraria!=null){//se apoya en el equals de DemandaHoraria
 			return false;
 		}
-		else if(!_demandaHoraria.equals(otro._demandaHoraria)){//incluye todos los parametros de franja horaria
+		else if(!_demandaHoraria.equals(otro._demandaHoraria)){//incluye todos los parametros de DemandaHoraria
 			return false;                                    
 		}
 		return true;

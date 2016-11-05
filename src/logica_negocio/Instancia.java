@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Instancia {
 
 	//variables de instancia
-	private double _tiempoMaximo;//el tiempo es de 24hrs, hay q ver si se hace con bigdecimal o long
+	private double _tiempoMaximo;//el tiempo es de 24hrs
 	private ArrayList<Oferta> _listaOfertas;
 	
 	//constructor
-	public Instancia(double tiempoTotal){
-		_tiempoMaximo=tiempoTotal;//seria de 24hrs creo que seria fijo, aunque quizas el usuario quiera definir otro tiempo
+	public Instancia(){//double tiempoTotal
+		_tiempoMaximo=24;//tiempoTotal 24hrs
 		_listaOfertas=new ArrayList<Oferta>();
 	}
 	

@@ -55,8 +55,8 @@ public class Subconjunto {
 		return _tiempoTotal;
 	}
 
-	//chequea sí una hora(tomando su indice) fue ocupada por alguna
-	//oferta
+	//chequea sí una hora(tomando su indice)  
+	//fue ocupada por alguna oferta
 	public boolean horaOcupada(int indiceHora){
 		return _tiempoRequerido[indiceHora]==true;
 	}
@@ -68,14 +68,20 @@ public class Subconjunto {
 		}
 		
 	}
+	
 	//previene una superposicion horaria de asignacion en un periodo de 24hrs
 	public boolean superposicionHoraria(Oferta otra){
 		for (int i =otra.getDemandaHoraria().getHoraInicio(); i <otra.getDemandaHoraria().getHoraInicio()+otra.getDemandaHoraria().getTiempo(); i++){
-			if(horaOcupada(i)){
+			if(horaOcupada(i)==true){//con true es mas explicito (marenco producciones)
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	//lectura protegida
+	public boolean[] getTiempoRequerido(){
+		return _tiempoRequerido;
 	}
 			
 	//equals
@@ -105,8 +111,8 @@ public class Subconjunto {
 	}
 	
 	//asegura contencion
-	private boolean contieneOferta(Oferta elem) {
-		return _conjOfertas.contains(elem);
+	private boolean contieneOferta(Oferta oferta) {
+		return _conjOfertas.contains(oferta);
 	}
 
 	//cant de elementos del subconjunto
@@ -127,15 +133,12 @@ public class Subconjunto {
 	@Override
 	public String toString()
 	{
-		return "Subconjunto [conjuntoOfertas=" + _conjOfertas
-				+ ", dinero total= $" + _dineroTotal + ", tiempoTotal="
+		return "Subconjunto [conjunto de Ofertas=" + _conjOfertas
+				+ ", dinero total= $" + _dineroTotal + ", tiempoTotal= Hrs"
 				+ _tiempoTotal + "]";
 	}
 	
-	
-	
-	
-	//             prueba solamente de codigo
+	// prueba de codigo solamente, muestra q tan ocupara esta la grilla horaria
 	public void mostrarHorasAlquiler(){//ingresa un arreglo por parametro
 		System.out.print("[");
 		for (int i = 0; i < _tiempoRequerido.length; i++){//se recorre el arreglo
@@ -144,38 +147,4 @@ public class Subconjunto {
 		}
 			System.out.println("]");
 	}
-	
-//	public static void main(String[] args){
-//		
-//		System.out.println("muestra arreglo inicializado");		
-//		mostrarArreglo(getTiempoRequerido());
-//		
-//		/**creacion de oferta*/
-//		DemandaHoraria dh=new DemandaHoraria(2,5,7);
-//		Oferta aux=new Oferta("agus", 100.0 ,dh);
-//		Subconjunto subConj=new Subconjunto();
-//		
-//		//se le dice al arreglo de boolean que cambie
-//		subConj.asignarTiempo(aux);
-//		System.out.println("demuestra como queda dicho arreglo luego de la asignacion");
-//		mostrarArreglo(getTiempoRequerido());
-//		
-//		subConj.agregarOfertas(aux);
-//		System.out.println("se muestra la oferta");
-//		System.out.println(subConj.toString());
-//		
-//		/**creacion de otra oferta*/
-//		//se crea la demanda horaria
-//		DemandaHoraria dh1=new DemandaHoraria(0,2,2);/////////esta mal revisar
-//		//se crea la oferta
-//		Oferta aux1=new Oferta("agust", 100.0 ,dh1);
-//		subConj.asignarTiempo(aux1);
-//		subConj.agregarOfertas(aux1);
-//		System.out.println("demuestra como queda dicho arreglo luego de las asignaciones");
-//		mostrarArreglo(getTiempoRequerido());
-//		System.out.println(subConj.toString());
-//		
-//		System.out.println("superposicion");
-//		System.out.println(subConj.superposicionHoraria(aux1));
-//	}
 }

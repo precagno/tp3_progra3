@@ -8,10 +8,10 @@ public class DemandaHoraria {
 	private int _tiempo;
 		
 	//constructor
-	public DemandaHoraria(int horaInicio, int tiempo, int horaFin){
+	public DemandaHoraria(int horaInicio, int tiempo){//, int horaFin
 		_horaInicio=horaInicio;
 		_tiempo=tiempo;
-		_horaFin=horaFin;
+		_horaFin=horaInicio+tiempo;
 	}
 	
 	//cargado de parametros
@@ -23,9 +23,9 @@ public class DemandaHoraria {
 		_tiempo=tiempo;
 	}
 	
-	public void setHoraFin(int hora){
-		_horaFin=hora;
-	}
+//	public void setHoraFin(int hora){
+//		_horaFin=hora;
+//	}
 	
 	//lectura protegida
 	public int getHoraInicio(){
@@ -50,7 +50,7 @@ public class DemandaHoraria {
 			return false;
 		}
 		DemandaHoraria otra=(DemandaHoraria)obj;
-		return this._horaInicio==otra._horaInicio && this._horaFin==otra._horaFin && this._tiempo==otra._tiempo;
+		return this._horaInicio==otra._horaInicio && this._tiempo==otra._tiempo && this._horaFin==otra._horaFin;//
 	}
 	
 	//representacion
