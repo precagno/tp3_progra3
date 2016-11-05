@@ -23,10 +23,11 @@ public class InstanciaEjemplo
 	public static Instancia instanciaEjemploDos(){
 		Instancia instancia=new Instancia();
 		
-		instancia.agregarOferta(new Oferta("Pedro Albornoz",600.0,new DemandaHoraria(0,2)));//,2
 		instancia.agregarOferta(new Oferta("Juan Alboran",200.0,new DemandaHoraria(5,5)));//,10
+		instancia.agregarOferta(new Oferta("Ernesto Bauman",100.0,new DemandaHoraria(16,3)));//,19
+		instancia.agregarOferta(new Oferta("Pedro Albornoz",600.0,new DemandaHoraria(0,2)));//,2
 		instancia.agregarOferta(new Oferta("Cesar Pitrola",400.0,new DemandaHoraria(11,4)));//,15
-		instancia.agregarOferta(new Oferta("Ernesto Bauman",100.0,new DemandaHoraria(16,2)));//,18
+		
 		
 		return instancia;
 	}
