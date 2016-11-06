@@ -21,7 +21,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 			
 			int duracionOferta=oferta.getDemandaHoraria().getTiempo();
 			boolean noHaySuperposicion=subconjunto.superposicionHoraria(oferta)==false;
-			boolean menorQueUnDia=subconjunto.getTiempoTotal()+duracionOferta<=24;
+			boolean menorQueUnDia=subconjunto.getTiempoTotal()+duracionOferta<=instancia.getTiempoMaximo();//24hrs
 			
 			if(noHaySuperposicion && menorQueUnDia){//si la oferta entrante no se superpone con las ya realizadas
 				subconjunto.agregarOfertas(oferta);//agrego la oferta al conjunto solucion
