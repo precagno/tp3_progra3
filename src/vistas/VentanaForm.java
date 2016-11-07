@@ -67,7 +67,7 @@ public class VentanaForm extends JFrame {
 		contentPane.add(lblTituloPrincipal);
 		
 		JComboBox<Integer> cmbxHoraInicio = new JComboBox<Integer>();
-		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1,2,3}));
+		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(horas(true)));
 		cmbxHoraInicio.setBounds(146, 118, 54, 20);
 		contentPane.add(cmbxHoraInicio);
 		
@@ -93,9 +93,22 @@ public class VentanaForm extends JFrame {
 		contentPane.add(btnIngresarOferta);
 		
 		cmbxTiempoDeUso = new JComboBox<Integer>();
-		cmbxTiempoDeUso.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1,2,3}));
+		cmbxTiempoDeUso.setModel(new DefaultComboBoxModel<Integer>(horas(false)));
 		cmbxTiempoDeUso.setBounds(305, 118, 54, 20);
 		contentPane.add(cmbxTiempoDeUso);
 		
+	}
+	
+	private Integer[] horas(boolean desdeCero){
+		Integer[] horas=new Integer[24];
+		
+		for(int i=0;i<24;i++){
+			if(desdeCero)
+				horas[i]=i;
+			else
+				horas[i]=i+1;
+		}
+		
+		return horas;
 	}
 }
