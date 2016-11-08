@@ -7,17 +7,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class VentanaForm extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textNombreOferente;
+	private JTextField txtNombreOferente;
 	private JLabel lblTituloPrincipal;
 	private JLabel lblTiempoDeUso;
 	private JLabel lblDineroOfrecido;
@@ -51,10 +55,10 @@ public class VentanaForm extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textNombreOferente = new JTextField();
-		textNombreOferente.setBounds(169, 77, 190, 20);
-		contentPane.add(textNombreOferente);
-		textNombreOferente.setColumns(10);
+		txtNombreOferente = new JTextField();
+		txtNombreOferente.setBounds(169, 77, 190, 20);
+		contentPane.add(txtNombreOferente);
+		txtNombreOferente.setColumns(10);
 		
 		JLabel lblNombreOferente = new JLabel("Nombre del oferente");
 		lblNombreOferente.setBounds(41, 80, 118, 14);
@@ -68,7 +72,7 @@ public class VentanaForm extends JFrame {
 		
 		JComboBox<Integer> cmbxHoraInicio = new JComboBox<Integer>();
 		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(horas(true)));
-		cmbxHoraInicio.setBounds(146, 118, 54, 20);
+		cmbxHoraInicio.setBounds(138, 118, 44, 20);
 		contentPane.add(cmbxHoraInicio);
 		
 		JLabel lblHoraInicio = new JLabel("Hora de inicio");
@@ -76,7 +80,7 @@ public class VentanaForm extends JFrame {
 		contentPane.add(lblHoraInicio);
 		
 		lblTiempoDeUso = new JLabel("Tiempo de uso");
-		lblTiempoDeUso.setBounds(210, 121, 85, 14);
+		lblTiempoDeUso.setBounds(222, 121, 85, 14);
 		contentPane.add(lblTiempoDeUso);
 		
 		lblDineroOfrecido = new JLabel("Dinero ofrecido");
@@ -89,16 +93,31 @@ public class VentanaForm extends JFrame {
 		contentPane.add(txtDineroOfrecido);
 		
 		JButton btnIngresarOferta = new JButton("Ingresar oferta");
+		btnIngresarOferta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				validacionCamposForm();
+			}
+		});
 		btnIngresarOferta.setBounds(149, 210, 130, 23);
 		contentPane.add(btnIngresarOferta);
 		
 		cmbxTiempoDeUso = new JComboBox<Integer>();
 		cmbxTiempoDeUso.setModel(new DefaultComboBoxModel<Integer>(horas(false)));
-		cmbxTiempoDeUso.setBounds(305, 118, 54, 20);
+		cmbxTiempoDeUso.setBounds(315, 118, 44, 20);
 		contentPane.add(cmbxTiempoDeUso);
+		
+		JLabel lblHorasInicio = new JLabel("hs");
+		lblHorasInicio.setBounds(192, 121, 20, 14);
+		contentPane.add(lblHorasInicio);
+		
+		JLabel lblHorasUso = new JLabel("hs");
+		lblHorasUso.setBounds(365, 121, 32, 14);
+		contentPane.add(lblHorasUso);
+		
 		
 	}
 	
+	/*---- Métodos auxiliares ----*/
 	private Integer[] horas(boolean desdeCero){
 		Integer[] horas=new Integer[24];
 		
@@ -110,5 +129,31 @@ public class VentanaForm extends JFrame {
 		}
 		
 		return horas;
+	}
+	
+	private void validacionCamposForm() {
+		boolean errores=false;
+		String mensajeErrores="";
+		String mensajeCorrecto="Oferta ingresada correctamente";
+		
+		if(txtNombreOferente.getText().equals("")){
+			mensajeErrores+="-Ingrese un nombre de oferente\n";
+			errores=true;
+		}
+		
+		if(txtDineroOfrecido.getText().equals("") || Integer.parseInt(txtDineroOfrecido.getText()) <= 0){
+			mensajeErrores+="-Ingrese un monto mayor a cero para la oferta\n";
+			errores=true;
+		}
+		
+		if(errores){
+			ventanaModal(mensajeErrores);
+		}else{
+			ventanaModal(mensajeCorrecto);
+		}
+	}
+	
+	private void ventanaModal(String mensaje){
+		JOptionPane.showMessageDialog(null,mensaje);
 	}
 }
