@@ -26,6 +26,7 @@ public class VentanaForm extends JFrame {
 	private JLabel lblTiempoDeUso;
 	private JLabel lblDineroOfrecido;
 	private JTextField txtDineroOfrecido;
+	private JComboBox<Integer> cmbxHoraInicio;
 	private JComboBox<Integer> cmbxTiempoDeUso;
 
 	/**
@@ -70,7 +71,7 @@ public class VentanaForm extends JFrame {
 		lblTituloPrincipal.setBounds(81, 21, 258, 45);
 		contentPane.add(lblTituloPrincipal);
 		
-		JComboBox<Integer> cmbxHoraInicio = new JComboBox<Integer>();
+		cmbxHoraInicio = new JComboBox<Integer>();
 		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(horas(true)));
 		cmbxHoraInicio.setBounds(138, 118, 44, 20);
 		contentPane.add(cmbxHoraInicio);
@@ -93,11 +94,7 @@ public class VentanaForm extends JFrame {
 		contentPane.add(txtDineroOfrecido);
 		
 		JButton btnIngresarOferta = new JButton("Ingresar oferta");
-		btnIngresarOferta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				validacionCamposForm();
-			}
-		});
+		
 		btnIngresarOferta.setBounds(149, 210, 130, 23);
 		contentPane.add(btnIngresarOferta);
 		
@@ -114,6 +111,11 @@ public class VentanaForm extends JFrame {
 		lblHorasUso.setBounds(365, 121, 32, 14);
 		contentPane.add(lblHorasUso);
 		
+		btnIngresarOferta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				validacionCamposForm();
+			}
+		});
 		
 	}
 	
@@ -150,9 +152,17 @@ public class VentanaForm extends JFrame {
 			ventanaModal(mensajeErrores);
 		}else{
 			ventanaModal(mensajeCorrecto);
+			limpiarCamposForm();
 		}
 	}
 	
+	private void limpiarCamposForm() {
+		txtNombreOferente.setText("");
+		txtDineroOfrecido.setText("");
+		cmbxHoraInicio.setSelectedIndex(0);
+		cmbxTiempoDeUso.setSelectedIndex(0);		
+	}
+
 	private void ventanaModal(String mensaje){
 		JOptionPane.showMessageDialog(null,mensaje);
 	}
