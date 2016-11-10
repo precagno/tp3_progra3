@@ -2,8 +2,8 @@ package logica_negocio;
 
 public interface Solver {
 	
-	/**toda clase que implemente Solver debera aderir 
-	 * a esta interfaz implementando este metodo
+	/**toda clase que implemente Solver debera adherir 
+	 * a esta interfaz implementando los siguientes metodos
 	 * @param instancia*/
 	
 	public Subconjunto resolver(Instancia instancia);

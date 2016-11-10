@@ -18,23 +18,23 @@ public class DAOfertas
 	//variables de instancia
 	private Gson _gson;
 	private String nombreArchivo;
-	private ArrayList<Oferta> listaCoordenadas;
+	private ArrayList<Oferta> listaOfertas;
 	
 	// cosntructor
 	public DAOfertas(String nombreArchivo)throws IOException{
 		this._gson=new Gson();
 		this.nombreArchivo=nombreArchivo;
-		this.listaCoordenadas=this.desserializaJson(this.nombreArchivo);
+		this.listaOfertas=this.desserializaJson(this.nombreArchivo);
 	}
 
 	// Retorna lista de ofertas
 	public ArrayList<Oferta> obtenerOfertas(){
-		return listaCoordenadas;
+		return listaOfertas;
 	}
 	
 	//Agrega una oferta a la lista y persiste dicha lista
 	public void agregarOferta(Oferta oferta) throws IOException{
-		listaCoordenadas.add(oferta);
+		listaOfertas.add(oferta);
 		persistirOfertas();
 	}
 	
@@ -43,19 +43,19 @@ public class DAOfertas
 	{
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 		Type collectionType=new TypeToken<ArrayList<Oferta>>(){}.getType();
-		ArrayList<Oferta> listaCoordenadas=_gson.fromJson(br,collectionType);
-		if(listaCoordenadas==null)//si el archivo esta vacio
+		ArrayList<Oferta> listaOfertas=_gson.fromJson(br,collectionType);
+		if(listaOfertas==null)//si el archivo esta vacio
 		{
-			listaCoordenadas=new ArrayList<Oferta>();//hace una lista vacia
+			listaOfertas=new ArrayList<Oferta>();//hace una lista vacia
 		}
 		
-		return listaCoordenadas;
+		return listaOfertas;
 	}
 	
 	//Persiste la lista de ofertas en el archivo elegido
 	private void persistirOfertas() throws IOException{
 		BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
-		escritor.write(_gson.toJson(listaCoordenadas));
+		escritor.write(_gson.toJson(listaOfertas));
 		escritor.close();
 	}
 }
