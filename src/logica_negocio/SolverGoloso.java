@@ -30,7 +30,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		try{
 			
 			if(_nombreArchivo==null){
-				throw new Exception("El nombre del archivo de ofertas no fue seteado");
+				return null;
 			}
 			
 			instancia = creadorInstancia();

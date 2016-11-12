@@ -31,6 +31,17 @@ public class SolverGolosoTest {
 		testearOrden(Comparador.porDinero(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{1,0,3,2});	
 	}
 	
+	@Test
+	public void nombreNoSeteadoTest() 
+	{
+		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
+		
+		Subconjunto solucion=solver.resolver();
+		
+		assertNull(solucion);
+	}
+	
+	/*-- Métodos auxiliares --*/
 	private void testearOrden(Comparator<Oferta> comparador,Instancia inst,int[] orden){
 		SolverGoloso solver=new SolverGoloso(comparador);
 		Instancia instancia=inst;
