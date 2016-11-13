@@ -2,16 +2,30 @@ package logica_negocio;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import modelo.DAOfertas;
+import modelo.ManejadorArchivos;
 import tests.InstanciaEjemplo;
 
 
 public class SolverGolosoTest {
 
+	private String _jsonOfertas="src/modelo/ofertas_test.json";
+	
+	@Before
+	@After
+	public void eliminarOfertas() throws IOException
+	{
+		ManejadorArchivos.borrarOfertas(_jsonOfertas);
+	}
+	
 	@Test
 	public void ordenarPorTiempoTest() 
 	{
@@ -39,6 +53,34 @@ public class SolverGolosoTest {
 		Subconjunto solucion=solver.resolver();
 		
 		assertNull(solucion);
+	}
+	
+	@Test
+	public void resolverTest() throws IOException 
+	{
+		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
+		
+		@SuppressWarnings("unused")
+		DAOfertas dao=new DAOfertas(_jsonOfertas);
+		
+		solver.setNombreArchivo(_jsonOfertas);
+		
+		Subconjunto solucion=solver.resolver();
+		
+		assertEquals(0,solucion.getCantOfertas());
+		
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(0));
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(1));
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(2));
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(3));
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(4));
+//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(5));
+//		
+//		solucion=solver.resolver();
+//		
+//		System.out.println(solucion);
+//		
+//		assertEquals(4,solucion.getCantOfertas());	
 	}
 	
 	/*-- Métodos auxiliares --*/

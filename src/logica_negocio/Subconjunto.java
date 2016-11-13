@@ -64,7 +64,6 @@ public class Subconjunto {
 		for (int i =tiempo.getDemandaHoraria().getHoraInicio(); i <tiempo.getDemandaHoraria().getHoraInicio()+tiempo.getDemandaHoraria().getTiempo(); i++){
 			_tiempoRequerido[i]=true;
 		}
-		
 	}
 	
 	//previene una superposicion horaria de asignacion en un periodo de 24hrs
@@ -96,7 +95,7 @@ public class Subconjunto {
 		}
 			
 		Subconjunto otro = (Subconjunto) obj;
-		if(this.getCantObjetos()!=otro.getCantObjetos()){
+		if(this.getCantOfertas()!=otro.getCantOfertas()){
 			return false;
 		}
 			
@@ -113,8 +112,8 @@ public class Subconjunto {
 		return _conjOfertas.contains(oferta);
 	}
 
-	//cant de elementos del subconjunto
-	private Object getCantObjetos() {
+	//cant de ofertas del subconjunto
+	public int getCantOfertas() {
 		return _conjOfertas.size();
 	}
 	
@@ -130,10 +129,14 @@ public class Subconjunto {
 	//representacion
 	@Override
 	public String toString()
-	{
-		return "Subconjunto [conjunto de Ofertas=" + _conjOfertas
-				+ ", dinero total= $" + _dineroTotal + ", tiempoTotal= Hrs"
-				+ _tiempoTotal + "]";
+	{	
+		String cadena="Subconjunto de ofertas: \n\n";
+		
+		for(Oferta oferta:_conjOfertas){
+			cadena+=oferta.toString();
+		}
+		
+		return cadena;
 	}
 	
 	// prueba de codigo solamente, muestra q tan ocupara esta la grilla horaria

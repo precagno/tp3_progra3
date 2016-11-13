@@ -1,5 +1,11 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,12 +13,7 @@ import org.junit.Test;
 import logica_negocio.DemandaHoraria;
 import logica_negocio.Oferta;
 import modelo.DAOfertas;
-import static org.junit.Assert.*;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import modelo.ManejadorArchivos;
 
 public class DAOfertasTest {
 
@@ -24,7 +25,7 @@ public class DAOfertasTest {
 	@After
 	public void eliminarOfertas() throws IOException
 	{
-		this.borrarOfertas(this.jsonOfertas);
+		ManejadorArchivos.borrarOfertas(this.jsonOfertas);
 	}
 	
 	@Test
@@ -65,14 +66,7 @@ public class DAOfertasTest {
 		assertEquals(0, listaOfertas.size());
 	}
 	
-	/*---- Metodos auxiliares ----*/
-	private void borrarOfertas(String nombreArchivo) throws IOException
-	{
-		BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
-		escritor.write("");
-		escritor.close();
-	}
-	
+	/*-- Métodos auxiliares --*/
 	private ArrayList<Oferta> listaOfertas()
 	{
 		ArrayList<Oferta> listaOfertas=new ArrayList<Oferta>();

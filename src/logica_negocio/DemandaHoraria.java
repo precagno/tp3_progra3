@@ -23,10 +23,6 @@ public class DemandaHoraria {
 		_tiempo=tiempo;
 	}
 	
-//	public void setHoraFin(int hora){
-//		_horaFin=hora;
-//	}
-	
 	//lectura protegida
 	public int getHoraInicio(){
 		return _horaInicio;
@@ -50,12 +46,12 @@ public class DemandaHoraria {
 			return false;
 		}
 		DemandaHoraria otra=(DemandaHoraria)obj;
-		return this._horaInicio==otra._horaInicio && this._tiempo==otra._tiempo && this._horaFin==otra._horaFin;//
+		return _horaInicio==otra._horaInicio && _tiempo==otra._tiempo && _horaFin==otra._horaFin;//
 	}
 	
 	//representacion
 	@Override
 	public String toString(){
-		return "( inicio "+this.getHoraInicio()+"["+this.getTiempo()+" Hrs]"+" final "+this.getHoraFin()+")";
+		return "(hora de inicio = "+_horaInicio+"hs, hora fin = "+_horaFin+"hs , duración = "+_tiempo+"hs)";
 	}
 }

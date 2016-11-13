@@ -36,6 +36,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 			instancia = creadorInstancia();
 			
 			ArrayList<Oferta> ofertasOrdenadas=this.ordenarOfertas(instancia);
+			//ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();
 			
 			for (Oferta oferta : ofertasOrdenadas) {
 				
