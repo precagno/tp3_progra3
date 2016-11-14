@@ -60,28 +60,34 @@ public class Subconjunto {
 	}
 	
 	//asignar tiempo en un dia de 24 hrs
-	public void asignarTiempo(Oferta tiempo){
-		for (int i =tiempo.getDemandaHoraria().getHoraInicio(); i <tiempo.getDemandaHoraria().getHoraInicio()+tiempo.getDemandaHoraria().getTiempo(); i++){
+	public void asignarTiempo(Oferta oferta){
+		for (int i =oferta.getDemandaHoraria().getHoraInicio(); i <oferta.getDemandaHoraria().getHoraInicio()+oferta.getDemandaHoraria().getTiempo(); i++){
 			_tiempoRequerido[i]=true;
 		}
 	}
 	
 	//previene una superposicion horaria de asignacion en un periodo de 24hrs
-	public boolean superposicionHoraria(Oferta otra){
-		for (int i =otra.getDemandaHoraria().getHoraInicio(); i <otra.getDemandaHoraria().getHoraInicio()+otra.getDemandaHoraria().getTiempo(); i++){
-			if(horaOcupada(i)==true){//con true es mas explicito (marenco producciones)
+	public boolean superposicionHoraria(Oferta otraOferta){
+		
+		int horaInicio=otraOferta.getDemandaHoraria().getHoraInicio();
+		int horaFin=otraOferta.getDemandaHoraria().getHoraFin();
+		
+		for (int i=horaInicio; i < horaFin; i++){
+			
+			boolean ocupada=horaOcupada(i)==true;
+			
+			if(ocupada){
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	
-	//lectura protegida
 	public boolean[] getTiempoRequerido(){
 		return _tiempoRequerido;
 	}
 			
-	//equals
 	@Override
 	public boolean equals(Object obj){
 		if (this == obj){

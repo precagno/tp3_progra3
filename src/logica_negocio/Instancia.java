@@ -37,4 +37,9 @@ public class Instancia {
 	public Oferta getOferta(int indice){
 		return _listaOfertas.get(indice);
 	}
+
+	@Override
+	public String toString() {
+		return "Instancia: tiempoMaximo =" + _tiempoMaximo + "\n "+_listaOfertas;
+	}
 }

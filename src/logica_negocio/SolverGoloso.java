@@ -35,17 +35,18 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 			
 			instancia = creadorInstancia();
 			
-			ArrayList<Oferta> ofertasOrdenadas=this.ordenarOfertas(instancia);
-			//ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();
-			
+			ArrayList<Oferta> ofertasOrdenadas=ordenarOfertas(instancia);
+						
 			for (Oferta oferta : ofertasOrdenadas) {
 				
 				int duracionOferta=oferta.getDemandaHoraria().getTiempo();
-				boolean noHaySuperposicion=subconjunto.superposicionHoraria(oferta)==false;
-				boolean menorQueUnDia=subconjunto.getTiempoTotal()+duracionOferta<=instancia.getTiempoMaximo();//24hrs
+				boolean haySuperposicion=subconjunto.superposicionHoraria(oferta)==true;
+				boolean esMenorQueUnDia=(duracionOferta+subconjunto.getTiempoTotal() <= instancia.getTiempoMaximo());
 				
-				if(noHaySuperposicion && menorQueUnDia){//si la oferta entrante no se superpone con las ya realizadas
+				if(!haySuperposicion && esMenorQueUnDia){//si la oferta entrante no se superpone con las ya realizadas
+					//y si la suma de esa oferta con las ya recibidas es menor o igual a 24hs
 					subconjunto.agregarOfertas(oferta);//agrego la oferta al conjunto solucion
+					subconjunto.asignarTiempo(oferta);
 				}
 			}
 			

@@ -46,6 +46,7 @@ public class SolverGolosoTest {
 	}
 	
 	@Test
+	
 	public void nombreNoSeteadoTest() 
 	{
 		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
@@ -58,29 +59,57 @@ public class SolverGolosoTest {
 	@Test
 	public void resolverTest() throws IOException 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
-		
-		@SuppressWarnings("unused")
-		DAOfertas dao=new DAOfertas(_jsonOfertas);
-		
+		SolverGoloso solver=new SolverGoloso(Comparador.porDinero());
+
 		solver.setNombreArchivo(_jsonOfertas);
+		
+		DAOfertas dao=new DAOfertas(_jsonOfertas);
 		
 		Subconjunto solucion=solver.resolver();
 		
 		assertEquals(0,solucion.getCantOfertas());
 		
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(0));
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(1));
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(2));
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(3));
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(4));
-//		dao.agregarOferta(InstanciaEjemplo.instanciaEjemploUno().getOferta(5));
-//		
-//		solucion=solver.resolver();
-//		
-//		System.out.println(solucion);
-//		
-//		assertEquals(4,solucion.getCantOfertas());	
+		Oferta oferta1=InstanciaEjemplo.instanciaEjemploUno().getOferta(0);
+		Oferta oferta2=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
+			
+		dao.agregarOferta(oferta1);
+		dao.agregarOferta(oferta2);
+
+		solucion=solver.resolver();
+		
+		assertEquals(2,solucion.getCantOfertas());
+	}
+	
+	@Test
+	public void resolverSuperposicionTest() throws IOException 
+	{
+		SolverGoloso solver=new SolverGoloso(Comparador.porDinero());
+
+		solver.setNombreArchivo(_jsonOfertas);
+		
+		DAOfertas dao=new DAOfertas(_jsonOfertas);
+		
+		Subconjunto solucion=solver.resolver();
+		
+		assertEquals(0,solucion.getCantOfertas());
+		
+		Oferta oferta1=InstanciaEjemplo.instanciaEjemploUno().getOferta(0);
+		Oferta oferta2=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
+		Oferta oferta3=InstanciaEjemplo.instanciaEjemploUno().getOferta(2);
+		Oferta oferta4=InstanciaEjemplo.instanciaEjemploUno().getOferta(3);
+		Oferta oferta5=InstanciaEjemplo.instanciaEjemploUno().getOferta(4);
+		Oferta oferta6=InstanciaEjemplo.instanciaEjemploUno().getOferta(5);
+		
+		dao.agregarOferta(oferta1);
+		dao.agregarOferta(oferta2);
+		dao.agregarOferta(oferta3);
+		dao.agregarOferta(oferta4);
+		dao.agregarOferta(oferta5);
+		dao.agregarOferta(oferta6);
+
+		solucion=solver.resolver();
+		
+		assertEquals(4,solucion.getCantOfertas());
 	}
 	
 	/*-- Métodos auxiliares --*/
