@@ -33,7 +33,6 @@ public class SubconjuntoTest {
 		assertFalse(subconjunto.horaOcupada(0));
 		assertFalse(subconjunto.horaOcupada(1));
 		
-		
 		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
 	
 		subconjunto.agregarOfertas(oferta);

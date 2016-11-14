@@ -62,6 +62,7 @@ public class Subconjunto {
 	//asignar tiempo en un dia de 24 hrs
 	public void asignarTiempo(Oferta oferta){
 		for (int i =oferta.getDemandaHoraria().getHoraInicio(); i <oferta.getDemandaHoraria().getHoraInicio()+oferta.getDemandaHoraria().getTiempo(); i++){
+			
 			_tiempoRequerido[i]=true;
 		}
 	}

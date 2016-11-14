@@ -8,10 +8,13 @@ public class DemandaHoraria {
 	private int _tiempo;
 		
 	//constructor
-	public DemandaHoraria(int horaInicio, int tiempo){//, int horaFin
+	public DemandaHoraria(int horaInicio, int tiempo)throws IllegalArgumentException{//, int horaFin
 		_horaInicio=horaInicio;
 		_tiempo=tiempo;
 		_horaFin=horaInicio+tiempo;
+		if(_horaFin > 24){
+			throw new IllegalArgumentException("El horario de fin de uso va de 0 a 24hs");
+		}
 	}
 	
 	//cargado de parametros
