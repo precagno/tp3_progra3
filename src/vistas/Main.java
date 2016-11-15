@@ -11,9 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class Main {
 
@@ -28,6 +31,7 @@ public class Main {
 	private JPanel pnlFormulario;
 	private JPanel pnlOfertas;
 	private JButton btnVerOfertas;
+	private JTextField horaFintextField;
 
 	/**
 	 * Launch the application.
@@ -49,6 +53,11 @@ public class Main {
 	 * Create the application.
 	 */
 	public Main() {
+		try{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		initialize();
 	}
 
@@ -57,24 +66,26 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Administrador de sala de ensayos por demanda");
+		frame.setBounds(100, 100, 488, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		pnlFormulario = new JPanel();
-		pnlFormulario.setBounds(0, 0, 434, 262);
+		pnlFormulario.setBounds(0, 0, 472, 262);
 		frame.getContentPane().add(pnlFormulario);
 		pnlFormulario.setLayout(null);
 		
 		lblTituloPrincipal = new JLabel("Ingreso de ofertas");
+		lblTituloPrincipal.setForeground(Color.GRAY);
 		lblTituloPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloPrincipal.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblTituloPrincipal.setBounds(126, 11, 187, 25);
+		lblTituloPrincipal.setBounds(127, 11, 220, 25);
 		pnlFormulario.add(lblTituloPrincipal);
 		
 		cmbxHoraInicio = new JComboBox<Integer>();
 		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(horas(true)));
-		cmbxHoraInicio.setBounds(123, 99, 45, 20);
+		cmbxHoraInicio.setBounds(108, 99, 45, 20);
 		pnlFormulario.add(cmbxHoraInicio);
 		
 		JLabel lblHoraInicio = new JLabel("Hora de inicio");
@@ -82,43 +93,43 @@ public class Main {
 		pnlFormulario.add(lblHoraInicio);
 		
 		lblTiempoDeUso = new JLabel("Tiempo de uso");
-		lblTiempoDeUso.setBounds(195, 102, 86, 14);
+		lblTiempoDeUso.setBounds(187, 102, 86, 14);
 		pnlFormulario.add(lblTiempoDeUso);
 		
 		lblDineroOfrecido = new JLabel("Dinero ofrecido");
-		lblDineroOfrecido.setBounds(29, 141, 99, 14);
+		lblDineroOfrecido.setBounds(27, 141, 99, 14);
 		pnlFormulario.add(lblDineroOfrecido);
 		
 		txtDineroOfrecido = new JTextField();
 		txtDineroOfrecido.setColumns(10);
-		txtDineroOfrecido.setBounds(133, 138, 105, 20);
+		txtDineroOfrecido.setBounds(128, 133, 105, 25);
 		pnlFormulario.add(txtDineroOfrecido);
 		
 		JButton btnIngresarOferta = new JButton("Ingresar oferta");
 		
-		btnIngresarOferta.setBounds(93, 190, 132, 23);
+		btnIngresarOferta.setBounds(71, 190, 132, 23);
 		pnlFormulario.add(btnIngresarOferta);
 		
 		JLabel lblNombreOferente = new JLabel("Nombre del oferente");
-		lblNombreOferente.setBounds(27, 66, 99, 14);
+		lblNombreOferente.setBounds(27, 66, 123, 14);
 		pnlFormulario.add(lblNombreOferente);
 		
 		txtNombreOferente = new JTextField();
-		txtNombreOferente.setBounds(136, 63, 248, 20);
+		txtNombreOferente.setBounds(156, 58, 205, 25);
 		pnlFormulario.add(txtNombreOferente);
 		txtNombreOferente.setColumns(10);
 		
 		cmbxTiempoDeUso = new JComboBox<Integer>();
 		cmbxTiempoDeUso.setModel(new DefaultComboBoxModel<Integer>(horas(false)));
-		cmbxTiempoDeUso.setBounds(291, 99, 38, 20);
+		cmbxTiempoDeUso.setBounds(270, 99, 54, 20);
 		pnlFormulario.add(cmbxTiempoDeUso);
 		
 		JLabel lblHorasInicio = new JLabel("hs");
-		lblHorasInicio.setBounds(178, 102, 21, 14);
+		lblHorasInicio.setBounds(156, 102, 21, 14);
 		pnlFormulario.add(lblHorasInicio);
 		
 		JLabel lblHorasUso = new JLabel("hs");
-		lblHorasUso.setBounds(339, 102, 28, 14);
+		lblHorasUso.setBounds(326, 102, 21, 14);
 		pnlFormulario.add(lblHorasUso);
 		
 		btnVerOfertas = new JButton("Ver ofertas");
@@ -128,13 +139,40 @@ public class Main {
 				pnlOfertas.setVisible(true);
 			}
 		});
-		btnVerOfertas.setBounds(235, 190, 132, 23);
+		btnVerOfertas.setBounds(252, 190, 132, 23);
 		pnlFormulario.add(btnVerOfertas);
 		
+		JLabel label = new JLabel("Hora Fin");
+		label.setBounds(357, 102, 54, 14);
+		pnlFormulario.add(label);
+		
+		horaFintextField = new JTextField();
+		horaFintextField.setColumns(10);
+		horaFintextField.setBounds(406, 94, 45, 25);
+		pnlFormulario.add(horaFintextField);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, null, new Color(0, 0, 0)));
+		panel.setBackground(new Color(211, 211, 211));
+		panel.setBounds(0, 237, 472, 25);
+		pnlFormulario.add(panel);
+		
+		JLabel lblUniversidadNacionalDe = new JLabel("Universidad Nacional de General Sarmiento | Programaci\u00F3n III | Trabajo Pr\u00E1ctico N\u00B03");
+		lblUniversidadNacionalDe.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblUniversidadNacionalDe.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUniversidadNacionalDe.setBounds(10, 5, 437, 14);
+		panel.add(lblUniversidadNacionalDe);
+		
+		JLabel lblPesos = new JLabel("pesos");
+		lblPesos.setBounds(236, 141, 37, 14);
+		pnlFormulario.add(lblPesos);
+		
 				pnlOfertas = new JPanel();
-				pnlOfertas.setBounds(0, 0, 434, 262);
+				pnlOfertas.setBounds(0, 0, 472, 262);
 				frame.getContentPane().add(pnlOfertas);
 				pnlOfertas.setLayout(null);
+				pnlOfertas.setVisible(false);
 				
 				JButton btnIngresarOfertas = new JButton("Ingresar ofertas");
 				btnIngresarOfertas.addActionListener(new ActionListener() {
@@ -174,6 +212,12 @@ public class Main {
 		boolean errores=false;
 		String mensajeErrores="";
 		String mensajeCorrecto="Oferta ingresada correctamente";
+		int unDiaCompleto=24;
+		//suma para mostrar la hora final si no te gusta sacala
+		int nro1=cmbxHoraInicio.getSelectedIndex();
+		int nro2=cmbxTiempoDeUso.getSelectedIndex();
+		int horaFinal=nro1+nro2+1;
+		horaFintextField.setText(""+horaFinal);
 		
 		if(txtNombreOferente.getText().equals("")){
 			mensajeErrores+="-Ingrese un nombre de oferente\n";
@@ -182,6 +226,11 @@ public class Main {
 		
 		if(txtDineroOfrecido.getText().equals("") || Integer.parseInt(txtDineroOfrecido.getText()) <= 0){
 			mensajeErrores+="-Ingrese un monto mayor a cero para la oferta\n";
+			errores=true;
+		}
+		//agregado vajo revicion
+		if((cmbxHoraInicio.getSelectedIndex()+1)+cmbxTiempoDeUso.getSelectedIndex()>unDiaCompleto){
+			mensajeErrores+="-Ingrese un horario valido, sobrepaso el limite de horas\n";
 			errores=true;
 		}
 		
@@ -197,7 +246,8 @@ public class Main {
 		txtNombreOferente.setText("");
 		txtDineroOfrecido.setText("");
 		cmbxHoraInicio.setSelectedIndex(0);
-		cmbxTiempoDeUso.setSelectedIndex(0);		
+		cmbxTiempoDeUso.setSelectedIndex(0);
+		horaFintextField.setText("");
 	}
 
 	private void ventanaModal(String mensaje){

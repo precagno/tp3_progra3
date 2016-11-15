@@ -38,6 +38,7 @@ public class Instancia {
 		return _listaOfertas.get(indice);
 	}
 
+	//representacion
 	@Override
 	public String toString() {
 		return "Instancia: tiempoMaximo =" + _tiempoMaximo + "\n "+_listaOfertas;

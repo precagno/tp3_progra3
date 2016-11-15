@@ -85,10 +85,12 @@ public class Subconjunto {
 		return false;
 	}
 	
+	//lectura protegida
 	public boolean[] getTiempoRequerido(){
 		return _tiempoRequerido;
 	}
-			
+	
+	//compara igualdad
 	@Override
 	public boolean equals(Object obj){
 		if (this == obj){

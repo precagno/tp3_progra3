@@ -19,6 +19,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		_nombreArchivo=nombreArchivo;
 	}
 	
+	//heuristica golosa
 	public Subconjunto resolver() {
 		
 		Subconjunto subconjunto=new Subconjunto();
@@ -69,6 +70,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		return aux;
 	}
 	
+	//ordena ofertas de acuerdo a comparador elegido
 	ArrayList<Oferta> ordenarOfertas(Instancia instancia) {
 		ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();//clon de una instancia
 		Collections.sort(ofertasOrdenadas,_comparador);//ordena de < a >
