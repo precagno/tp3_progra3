@@ -12,7 +12,7 @@ import modelo.DAOfertas;
 public class ManejadorOfertas{
 	
 	private  DAOfertas _dao;
-	private String _jsonOfertas="";
+	private String _jsonOfertas="src/modelo/ofertas.json";
 	
 	public ManejadorOfertas() throws IOException{
 		_dao=new DAOfertas(_jsonOfertas);
