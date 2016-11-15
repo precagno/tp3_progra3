@@ -17,7 +17,7 @@ import modelo.ManejadorArchivos;
 
 public class DAOfertasTest {
 
-	private String jsonOfertas="src/modelo/ofertas.json";
+	private String jsonOfertas="src/modelo/ofertas_test.json";
 	private String jsonOfertasVacia="src/modelo/ofertas_vacia.json";
 	private String jsonOfertasInexistente="src/modelo/ofertas_inexistente.json";
 	
@@ -25,13 +25,13 @@ public class DAOfertasTest {
 	@After
 	public void eliminarOfertas() throws IOException
 	{
-		ManejadorArchivos.borrarOfertas(this.jsonOfertas);
+		ManejadorArchivos.borrarContenido(jsonOfertas);
 	}
 	
 	@Test
 	public void ListaOfertasVacia() throws IOException
 	{
-		DAOfertas dao=new DAOfertas(this.jsonOfertasVacia);
+		DAOfertas dao=new DAOfertas(jsonOfertasVacia);
 		
 		ArrayList<Oferta> listaOfertas=dao.obtenerOfertas();
 		
@@ -42,24 +42,43 @@ public class DAOfertasTest {
 	@Test
 	public void agregarOfertaTest() throws IOException
 	{
-		DAOfertas dao=new DAOfertas(this.jsonOfertas);
+		DAOfertas dao=new DAOfertas(jsonOfertas);
 		
 		ArrayList<Oferta> listaOfertas=dao.obtenerOfertas();
 		
 		assertEquals(0,listaOfertas.size());
 		assertNotEquals(10,listaOfertas.size());
 		
-		dao.agregarOferta(this.listaOfertas().get(0));
-		dao.agregarOferta(this.listaOfertas().get(1));
-		dao.agregarOferta(this.listaOfertas().get(2));
+		dao.agregarOferta(listaOfertas().get(0));
+		dao.agregarOferta(listaOfertas().get(1));
+		dao.agregarOferta(listaOfertas().get(2));
 		
 		assertEquals(3,listaOfertas.size());
+	}
+	
+	@Test
+	public void eliminarOfertasTest() throws IOException
+	{
+		DAOfertas dao=new DAOfertas(jsonOfertas);
+		
+		assertEquals(0,dao.obtenerOfertas().size());
+		assertNotEquals(10,dao.obtenerOfertas().size());
+		
+		dao.agregarOferta(listaOfertas().get(0));
+		dao.agregarOferta(listaOfertas().get(1));
+		dao.agregarOferta(listaOfertas().get(2));
+		
+		assertEquals(3,dao.obtenerOfertas().size());
+		
+		dao.eliminarOfertas();
+		
+		assertEquals(0,dao.obtenerOfertas().size());
 	}
 	
 	@Test(expected=IOException.class)
 	public void ArchivoInexistenteTest() throws IOException
 	{
-		DAOfertas dao=new DAOfertas(this.jsonOfertasInexistente);
+		DAOfertas dao=new DAOfertas(jsonOfertasInexistente);
 		
 		ArrayList<Oferta> listaOfertas=dao.obtenerOfertas();
 		

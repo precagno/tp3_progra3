@@ -23,7 +23,7 @@ public class SolverGolosoTest {
 	@After
 	public void eliminarOfertas() throws IOException
 	{
-		ManejadorArchivos.borrarOfertas(_jsonOfertas);
+		ManejadorArchivos.borrarContenido(_jsonOfertas);
 	}
 	
 	@Test

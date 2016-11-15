@@ -17,24 +17,24 @@ public class DAOfertas
 {
 	//variables de instancia
 	private Gson _gson;
-	private String nombreArchivo;
-	private ArrayList<Oferta> listaOfertas;
+	private String _nombreArchivo;
+	private ArrayList<Oferta> _listaOfertas;
 	
 	// cosntructor
 	public DAOfertas(String nombreArchivo)throws IOException{
-		this._gson=new Gson();
-		this.nombreArchivo=nombreArchivo;
-		this.listaOfertas=this.desserializaJson(this.nombreArchivo);
+		_gson=new Gson();
+		_nombreArchivo=nombreArchivo;
+		_listaOfertas=desserializaJson(_nombreArchivo);
 	}
 
 	// Retorna lista de ofertas
 	public ArrayList<Oferta> obtenerOfertas(){
-		return listaOfertas;
+		return _listaOfertas;
 	}
 	
 	//Agrega una oferta a la lista y persiste dicha lista
 	public void agregarOferta(Oferta oferta) throws IOException{
-		listaOfertas.add(oferta);
+		_listaOfertas.add(oferta);
 		persistirOfertas();
 	}
 	
@@ -54,8 +54,13 @@ public class DAOfertas
 	
 	//Persiste la lista de ofertas en el archivo elegido
 	private void persistirOfertas() throws IOException{
-		BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
-		escritor.write(_gson.toJson(listaOfertas));
+		BufferedWriter escritor = new BufferedWriter(new FileWriter(_nombreArchivo));
+		escritor.write(_gson.toJson(_listaOfertas));
 		escritor.close();
+	}
+
+	public void eliminarOfertas() throws IOException {
+		ManejadorArchivos.borrarContenido(_nombreArchivo);
+		_listaOfertas=desserializaJson(_nombreArchivo);
 	}
 }

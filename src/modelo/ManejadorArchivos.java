@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ManejadorArchivos
 {
-	public static void borrarOfertas(String nombreArchivo) throws IOException
+	public static void borrarContenido(String nombreArchivo) throws IOException
 	{
 		BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo));
 		escritor.write("");
