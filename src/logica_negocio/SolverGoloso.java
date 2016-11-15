@@ -14,12 +14,9 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 	private String _nombreArchivo;
 	
 	//constructor
-	public SolverGoloso(Comparator<Oferta> comparador){
+	public SolverGoloso(Comparator<Oferta> comparador,String nombreArchivo){
 		_comparador=comparador;
-	}
-
-	public void setNombreArchivo(String nombre){
-		_nombreArchivo=nombre;
+		_nombreArchivo=nombreArchivo;
 	}
 	
 	public Subconjunto resolver() {

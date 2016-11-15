@@ -46,22 +46,9 @@ public class SolverGolosoTest {
 	}
 	
 	@Test
-	
-	public void nombreNoSeteadoTest() 
-	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porTiempo());
-		
-		Subconjunto solucion=solver.resolver();
-		
-		assertNull(solucion);
-	}
-	
-	@Test
 	public void resolverTest() throws IOException 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porDinero());
-
-		solver.setNombreArchivo(_jsonOfertas);
+		SolverGoloso solver=new SolverGoloso(Comparador.porDinero(),_jsonOfertas);
 		
 		DAOfertas dao=new DAOfertas(_jsonOfertas);
 		
@@ -83,9 +70,7 @@ public class SolverGolosoTest {
 	@Test
 	public void resolverSuperposicionTest() throws IOException 
 	{
-		SolverGoloso solver=new SolverGoloso(Comparador.porDinero());
-
-		solver.setNombreArchivo(_jsonOfertas);
+		SolverGoloso solver=new SolverGoloso(Comparador.porDinero(),_jsonOfertas);
 		
 		DAOfertas dao=new DAOfertas(_jsonOfertas);
 		
@@ -114,7 +99,7 @@ public class SolverGolosoTest {
 	
 	/*-- Métodos auxiliares --*/
 	private void testearOrden(Comparator<Oferta> comparador,Instancia inst,int[] orden){
-		SolverGoloso solver=new SolverGoloso(comparador);
+		SolverGoloso solver=new SolverGoloso(comparador,_jsonOfertas);
 		Instancia instancia=inst;
 		ArrayList<Oferta> listaOfertasOrdenada=solver.ordenarOfertas(inst);
 		
