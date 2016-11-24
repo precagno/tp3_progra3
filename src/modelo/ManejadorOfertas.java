@@ -11,9 +11,11 @@ import modelo.DAOfertas;
 
 public class ManejadorOfertas{
 	
+	//constructor
 	private static DAOfertas _dao;
 	private static String _jsonOfertas="src/modelo/ofertas.json";
 	
+	//getter de instancia
 	private static DAOfertas getInstanciaDAO() throws IOException{
 		if(_dao==null){
 			_dao=new DAOfertas(_jsonOfertas);
@@ -28,14 +30,17 @@ public class ManejadorOfertas{
 		return getInstanciaDAO().obtenerOfertas();
 	}
 	
+	//agrega ofertas a la persistencia
 	public void agregarOferta(Oferta oferta) throws IOException{
 		getInstanciaDAO().agregarOferta(oferta);
 	}
 	
+	//elimina ofertas de la persistencia
 	public void eliminarOfertasPersistidas() throws IOException{
 		getInstanciaDAO().eliminarOfertas();
 	}
 	
+	//retorna la posible solucion
 	public Solucion devuelveSolucion(Comparator<Oferta> comparador){
 		
 		SolverGoloso solver=new SolverGoloso(comparador,_jsonOfertas);

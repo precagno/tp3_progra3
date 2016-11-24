@@ -20,25 +20,25 @@ public class DAOfertas
 	private String _nombreArchivo;
 	private ArrayList<Oferta> _listaOfertas;
 	
-	// cosntructor
+	//cosntructor
 	public DAOfertas(String nombreArchivo)throws IOException{
 		_gson=new Gson();
 		_nombreArchivo=nombreArchivo;
 		_listaOfertas=desserializaJson(_nombreArchivo);
 	}
 
-	// Retorna lista de ofertas
+	//retorna lista de ofertas
 	public ArrayList<Oferta> obtenerOfertas(){
 		return _listaOfertas;
 	}
 	
-	//Agrega una oferta a la lista y persiste dicha lista
+	//agrega una oferta a la lista y persiste dicha lista
 	public void agregarOferta(Oferta oferta) throws IOException{
 		_listaOfertas.add(oferta);
 		persistirOfertas();
 	}
 	
-	// Desserializa y retorna una lista de ofertas
+	//desserializa y retorna una lista de ofertas
 	private ArrayList<Oferta> desserializaJson(String nombreArchivo)throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -52,13 +52,14 @@ public class DAOfertas
 		return listaOfertas;
 	}
 	
-	//Persiste la lista de ofertas en el archivo elegido
+	//persiste la lista de ofertas en el archivo elegido
 	private void persistirOfertas() throws IOException{
 		BufferedWriter escritor = new BufferedWriter(new FileWriter(_nombreArchivo));
 		escritor.write(_gson.toJson(_listaOfertas));
 		escritor.close();
 	}
 
+	//elimina ofertas
 	public void eliminarOfertas() throws IOException {
 		ManejadorArchivos.borrarContenido(_nombreArchivo);
 		_listaOfertas=desserializaJson(_nombreArchivo);

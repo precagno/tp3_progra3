@@ -11,7 +11,7 @@ public class DemandaHoraria {
 	public DemandaHoraria(int horaInicio, int tiempo)throws IllegalArgumentException{//, int horaFin
 		_horaInicio=horaInicio;
 		_tiempo=tiempo;
-		_horaFin=horaInicio+tiempo;
+		_horaFin=horaInicio+tiempo+1;
 		if(_horaFin > 24){
 			throw new IllegalArgumentException("El horario de fin de uso va de 0 a 24hs");
 		}

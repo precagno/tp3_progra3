@@ -93,7 +93,7 @@ public class Main {
 		
 		cmbxHoraInicio = new JComboBox<Integer>();
 		cmbxHoraInicio.setModel(new DefaultComboBoxModel<Integer>(horas(true)));
-		cmbxHoraInicio.setBounds(108, 99, 45, 20);
+		cmbxHoraInicio.setBounds(104, 99, 54, 20);
 		pnlFormulario.add(cmbxHoraInicio);
 		
 		JLabel lblHoraInicio = new JLabel("Hora de inicio");
@@ -123,7 +123,7 @@ public class Main {
 		pnlFormulario.add(lblNombreOferente);
 		
 		txtNombreOferente = new JTextField();
-		txtNombreOferente.setBounds(156, 58, 205, 25);
+		txtNombreOferente.setBounds(156, 47, 205, 36);
 		pnlFormulario.add(txtNombreOferente);
 		txtNombreOferente.setColumns(10);
 		
@@ -133,7 +133,7 @@ public class Main {
 		pnlFormulario.add(cmbxTiempoDeUso);
 		
 		JLabel lblHorasInicio = new JLabel("hs");
-		lblHorasInicio.setBounds(156, 102, 21, 14);
+		lblHorasInicio.setBounds(163, 102, 21, 14);
 		pnlFormulario.add(lblHorasInicio);
 		
 		JLabel lblHorasUso = new JLabel("hs");
@@ -223,27 +223,31 @@ public class Main {
 		return horas;
 	}
 	
+	//validacion de campos a llenar
 	private void validacionCamposForm() throws IllegalArgumentException, IOException {
 		boolean errores=false;
 		String mensajeErrores="";
 		String mensajeCorrecto="Oferta ingresada correctamente";
 		int unDiaCompleto=24;
-		//suma para mostrar la hora final si no te gusta sacala
+		//suma para mostrar la hora final
 		int nro1=cmbxHoraInicio.getSelectedIndex();
 		int nro2=cmbxTiempoDeUso.getSelectedIndex();
 		int horaFinal=nro1+nro2+1;
 		horaFintextField.setText(""+horaFinal);
 		
+		//validacion de oferente
 		if(txtNombreOferente.getText().equals("")){
 			mensajeErrores+="-Ingrese un nombre de oferente\n";
 			errores=true;
 		}
 		
+		//validacion de dinero
 		if(txtDineroOfrecido.getText().equals("") || Integer.parseInt(txtDineroOfrecido.getText()) <= 0){
 			mensajeErrores+="-Ingrese un monto mayor a cero para la oferta\n";
 			errores=true;
 		}
-		//agregado vajo revicion
+		
+		//validacion de tiempo
 		if((cmbxHoraInicio.getSelectedIndex()+1)+cmbxTiempoDeUso.getSelectedIndex()>unDiaCompleto){
 			mensajeErrores+="-Ingrese un horario valido, sobrepaso el limite de horas\n";
 			errores=true;
@@ -262,6 +266,7 @@ public class Main {
 		}
 	}
 	
+	//poner en blanco los campos a llenar
 	private void limpiarCamposForm() {
 		txtNombreOferente.setText("");
 		txtDineroOfrecido.setText("");
@@ -278,6 +283,7 @@ public class Main {
 		return JOptionPane.showConfirmDialog(null,mensaje);
 	}
 	
+	//crea la vista de la resolucion golosa
 	private JFrame creadorVentanaOfertas(){
 		JFrame ventanaOfertas=new VistaOfertas();
 		ventanaOfertas.setBounds(400, 400, 488, 200);

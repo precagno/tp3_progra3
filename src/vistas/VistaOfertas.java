@@ -19,7 +19,7 @@ import modelo.ManejadorOfertas;
 @SuppressWarnings("serial")
 public class VistaOfertas extends JFrame {
 	public VistaOfertas() {
-		super("Listado de ofertas");
+		super("Listado de ofertas resueltas");
 		DefaultTableModel dtm= new DefaultTableModel(new Object[0][0],nombreColumnas());
 	
 		final JTable table = new JTable(dtm);
@@ -37,15 +37,6 @@ public class VistaOfertas extends JFrame {
 				Main.setCrearVentanaOfertas(true);	
 			}
 		});
-		
-//		Object[][] data = {
-//			{"Julio Barraza",0,3,600.0},
-//			{"Ernesto Sabato",5,8,450.0},
-//			{"Pablo Biglia",8,12,800.0},
-//			{"Jose Alcandaro",15,20,500.0},
-//		};
-		
-		
 	}
 
 	public static void main(String[] args) {
@@ -60,10 +51,11 @@ public class VistaOfertas extends JFrame {
 		"Dinero"};
 	}
 	
+	//completa la vista con la solucion golosa (comparador elegido por cociente)
 	private void populaTableModel(DefaultTableModel dtm)
 	{
 		ManejadorOfertas manejador=new ManejadorOfertas();
-		Comparator<Oferta> comparador=Comparador.porCociente();
+		Comparator<Oferta> comparador=Comparador.porCociente();// comparador por cociente
 		Solucion solucion=manejador.devuelveSolucion(comparador);
 		
 		for(int i=0;i<solucion.getCantOfertas();i++){

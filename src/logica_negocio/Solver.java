@@ -6,5 +6,6 @@ public interface Solver {
 	 * a esta interfaz implementando los siguientes metodos
 	 * @param instancia*/
 	
+	//metodo que debe implementar toda clase que adhiera
 	public Solucion resolver();
 }
