@@ -6,38 +6,40 @@ import java.util.Comparator;
 
 import logica_negocio.Oferta;
 import logica_negocio.SolverGoloso;
-import logica_negocio.Subconjunto;
+import logica_negocio.Solucion;
 import modelo.DAOfertas;
 
 public class ManejadorOfertas{
 	
-	private  DAOfertas _dao;
-	private String _jsonOfertas="src/modelo/ofertas.json";
+	private static DAOfertas _dao;
+	private static String _jsonOfertas="src/modelo/ofertas.json";
 	
-	public ManejadorOfertas() throws IOException{
-		_dao=new DAOfertas(_jsonOfertas);
+	private static DAOfertas getInstanciaDAO() throws IOException{
+		if(_dao==null){
+			_dao=new DAOfertas(_jsonOfertas);
+		}
+		
+		return _dao;
 	}
 	
 	/*-- Devuelve todas las ofertas ya persistidas*/
 	/*-- (no el conjunto solucion)  --*/
-	public ArrayList<Oferta> obtenerOfertasPersistidas(){
-		return _dao.obtenerOfertas();
+	public ArrayList<Oferta> obtenerOfertasPersistidas() throws IOException{
+		return getInstanciaDAO().obtenerOfertas();
 	}
 	
-	
-	
 	public void agregarOferta(Oferta oferta) throws IOException{
-		_dao.agregarOferta(oferta);
+		getInstanciaDAO().agregarOferta(oferta);
 	}
 	
 	public void eliminarOfertasPersistidas() throws IOException{
-		_dao.eliminarOfertas();
+		getInstanciaDAO().eliminarOfertas();
 	}
 	
-	public Subconjunto devuelveSolucion(Comparator<Oferta> comparador){
+	public Solucion devuelveSolucion(Comparator<Oferta> comparador){
 		
 		SolverGoloso solver=new SolverGoloso(comparador,_jsonOfertas);
-		Subconjunto solucion=solver.resolver();
+		Solucion solucion=solver.resolver();
 		
 		return solucion;
 	}

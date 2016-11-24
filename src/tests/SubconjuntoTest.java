@@ -6,13 +6,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import logica_negocio.Oferta;
-import logica_negocio.Subconjunto;
+import logica_negocio.Solucion;
 
 public class SubconjuntoTest {
 
 	@Test
 	public void asignarTiempotest(){
-		Subconjunto subconjunto=new Subconjunto();
+		Solucion subconjunto=new Solucion();
 		
 		assertFalse(subconjunto.horaOcupada(11));
 		assertFalse(subconjunto.horaOcupada(12));
@@ -28,7 +28,7 @@ public class SubconjuntoTest {
 	
 	@Test
 	public void asignarTiempoBordetest(){
-		Subconjunto subconjunto=new Subconjunto();
+		Solucion subconjunto=new Solucion();
 		
 		assertFalse(subconjunto.horaOcupada(0));
 		assertFalse(subconjunto.horaOcupada(1));
@@ -57,7 +57,7 @@ public class SubconjuntoTest {
 	
 	@Test
 	public void superposicionHorariatest(){
-		Subconjunto subconjunto=new Subconjunto();
+		Solucion subconjunto=new Solucion();
 	
 		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(0);
 	
@@ -73,7 +73,7 @@ public class SubconjuntoTest {
 	
 	@Test
 	public void superposicionHorariaBordetest(){
-		Subconjunto subconjunto=new Subconjunto();
+		Solucion subconjunto=new Solucion();
 	
 		Oferta oferta=InstanciaEjemplo.instanciaEjemploUno().getOferta(1);
 	

@@ -6,5 +6,5 @@ public interface Solver {
 	 * a esta interfaz implementando los siguientes metodos
 	 * @param instancia*/
 	
-	public Subconjunto resolver();
+	public Solucion resolver();
 }

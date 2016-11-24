@@ -29,20 +29,20 @@ public class SolverGolosoTest {
 	@Test
 	public void ordenarPorTiempoTest() 
 	{
-		testearOrden(Comparador.porTiempo(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{2,1,3,0});
+		testearOrden(Comparador.porTiempo(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{0,3,1,2});
 	}
 	
 	@Test
 	public void ordenarPorCocienteTest() 
 	{
-		testearOrden(Comparador.porCociente(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{1,0,3,2});
+		testearOrden(Comparador.porCociente(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{2,3,0,1});
 	}
 	
 	@Test
 	public void ordenarPorDineroTest() 
 	{
 		
-		testearOrden(Comparador.porDinero(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{1,0,3,2});	
+		testearOrden(Comparador.porDinero(), InstanciaEjemplo.instanciaEjemploDos(),new int[]{2,3,0,1});	
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class SolverGolosoTest {
 		
 		DAOfertas dao=new DAOfertas(_jsonOfertas);
 		
-		Subconjunto solucion=solver.resolver();
+		Solucion solucion=solver.resolver();
 		
 		assertEquals(0,solucion.getCantOfertas());
 		
@@ -74,7 +74,7 @@ public class SolverGolosoTest {
 		
 		DAOfertas dao=new DAOfertas(_jsonOfertas);
 		
-		Subconjunto solucion=solver.resolver();
+		Solucion solucion=solver.resolver();
 		
 		assertEquals(0,solucion.getCantOfertas());
 		

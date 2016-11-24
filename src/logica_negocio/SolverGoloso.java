@@ -20,9 +20,9 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 	}
 	
 	//heuristica golosa
-	public Subconjunto resolver() {
+	public Solucion resolver() {
 		
-		Subconjunto subconjunto=new Subconjunto();
+		Solucion subconjunto=new Solucion();
 		Instancia instancia=null;
 		
 		try{
@@ -41,7 +41,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 				boolean haySuperposicion=subconjunto.superposicionHoraria(oferta)==true;
 				boolean esMenorQueUnDia=(duracionOferta+subconjunto.getTiempoTotal() <= instancia.getTiempoMaximo());
 				
-				if(!haySuperposicion && esMenorQueUnDia){//si la oferta entrante no se superpone con las ya realizadas
+				if(!haySuperposicion && esMenorQueUnDia && !subconjunto.contieneOferta(oferta)){//si la oferta entrante no se superpone con las ya realizadas
 					//y si la suma de esa oferta con las ya recibidas es menor o igual a 24hs
 					subconjunto.agregarOfertas(oferta);//agrego la oferta al conjunto solucion
 					subconjunto.asignarTiempo(oferta);
@@ -56,7 +56,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 		return subconjunto;
 	}
 
-	/*-- Métodos auxiliares --*/
+	/*-- Mï¿½todos auxiliares --*/
 	
 	/*-- Crea una instancia a partir de ofertas anteriormente persistidas --*/
 	private Instancia creadorInstancia() throws IOException{
@@ -74,6 +74,7 @@ public class SolverGoloso implements Solver {//adiere a interface Solver
 	ArrayList<Oferta> ordenarOfertas(Instancia instancia) {
 		ArrayList<Oferta> ofertasOrdenadas=instancia.obtenerOfertas();//clon de una instancia
 		Collections.sort(ofertasOrdenadas,_comparador);//ordena de < a >
+		Collections.reverse(ofertasOrdenadas);
 		return ofertasOrdenadas;
 	}
 }

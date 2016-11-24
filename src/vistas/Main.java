@@ -1,10 +1,15 @@
 package vistas;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -12,14 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import java.awt.Color;
 import javax.swing.border.BevelBorder;
+
+import logica_negocio.DemandaHoraria;
+import logica_negocio.Oferta;
+import modelo.ManejadorOfertas;
 
 public class Main {
 
+	public static boolean crearVentanaOfertas=true;
 	private JFrame frame;
 	private JTextField txtNombreOferente;
 	private JLabel lblTituloPrincipal;
@@ -29,9 +35,10 @@ public class Main {
 	private JComboBox<Integer> cmbxHoraInicio;
 	private JComboBox<Integer> cmbxTiempoDeUso;
 	private JPanel pnlFormulario;
-	private JPanel pnlOfertas;
 	private JButton btnVerOfertas;
 	private JTextField horaFintextField;
+	private ManejadorOfertas manejadorOfertas;
+	
 
 	/**
 	 * Launch the application.
@@ -71,6 +78,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		manejadorOfertas=new ManejadorOfertas();
 		pnlFormulario = new JPanel();
 		pnlFormulario.setBounds(0, 0, 472, 262);
 		frame.getContentPane().add(pnlFormulario);
@@ -107,7 +115,7 @@ public class Main {
 		
 		JButton btnIngresarOferta = new JButton("Ingresar oferta");
 		
-		btnIngresarOferta.setBounds(71, 190, 132, 23);
+		btnIngresarOferta.setBounds(27, 190, 132, 23);
 		pnlFormulario.add(btnIngresarOferta);
 		
 		JLabel lblNombreOferente = new JLabel("Nombre del oferente");
@@ -132,14 +140,15 @@ public class Main {
 		lblHorasUso.setBounds(326, 102, 21, 14);
 		pnlFormulario.add(lblHorasUso);
 		
-		btnVerOfertas = new JButton("Ver ofertas");
+		btnVerOfertas = new JButton("Ver solución");
 		btnVerOfertas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pnlFormulario.setVisible(false);
-				pnlOfertas.setVisible(true);
+				if(crearVentanaOfertas){
+					creadorVentanaOfertas();
+				}
 			}
 		});
-		btnVerOfertas.setBounds(252, 190, 132, 23);
+		btnVerOfertas.setBounds(319, 190, 132, 23);
 		pnlFormulario.add(btnVerOfertas);
 		
 		JLabel label = new JLabel("Hora Fin");
@@ -168,25 +177,31 @@ public class Main {
 		lblPesos.setBounds(236, 141, 37, 14);
 		pnlFormulario.add(lblPesos);
 		
-				pnlOfertas = new JPanel();
-				pnlOfertas.setBounds(0, 0, 472, 262);
-				frame.getContentPane().add(pnlOfertas);
-				pnlOfertas.setLayout(null);
-				pnlOfertas.setVisible(false);
-				
-				JButton btnIngresarOfertas = new JButton("Ingresar ofertas");
-				btnIngresarOfertas.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						pnlOfertas.setVisible(false);
-						pnlFormulario.setVisible(true);
+		JButton btnBorrarOfertas = new JButton("Borrar ofertas");
+		btnBorrarOfertas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					
+					if(ventanaModalDesicion("Desea borrar todas las ofertas?")==0){
+						manejadorOfertas.eliminarOfertasPersistidas();
 					}
-				});
-				btnIngresarOfertas.setBounds(109, 99, 132, 23);
-				pnlOfertas.add(btnIngresarOfertas);
+					
+				} catch (IOException e) {
+					e.getMessage();
+				}
+			}
+		});
+		btnBorrarOfertas.setBounds(169, 190, 140, 23);
+		pnlFormulario.add(btnBorrarOfertas);
 		
 		btnIngresarOferta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				validacionCamposForm();
+				try {
+					validacionCamposForm();
+				
+				} catch (IOException e) {
+					e.getMessage();
+				}
 			}
 		});
 		/*---- Fin panel Ofertas ----*/
@@ -208,7 +223,7 @@ public class Main {
 		return horas;
 	}
 	
-	private void validacionCamposForm() {
+	private void validacionCamposForm() throws IllegalArgumentException, IOException {
 		boolean errores=false;
 		String mensajeErrores="";
 		String mensajeCorrecto="Oferta ingresada correctamente";
@@ -237,7 +252,12 @@ public class Main {
 		if(errores){
 			ventanaModal(mensajeErrores);
 		}else{
+			
+			Double dinero=Double.valueOf(txtDineroOfrecido.getText());
 			ventanaModal(mensajeCorrecto);
+	
+			manejadorOfertas.agregarOferta(new Oferta(txtNombreOferente.getText(),dinero, new DemandaHoraria(cmbxHoraInicio.getSelectedIndex(),cmbxTiempoDeUso.getSelectedIndex() )));
+			
 			limpiarCamposForm();
 		}
 	}
@@ -252,5 +272,21 @@ public class Main {
 
 	private void ventanaModal(String mensaje){
 		JOptionPane.showMessageDialog(null,mensaje);
+	}
+	
+	private int ventanaModalDesicion(String mensaje){
+		return JOptionPane.showConfirmDialog(null,mensaje);
+	}
+	
+	private JFrame creadorVentanaOfertas(){
+		JFrame ventanaOfertas=new VistaOfertas();
+		ventanaOfertas.setBounds(400, 400, 488, 200);
+		ventanaOfertas.setVisible(true);
+		setCrearVentanaOfertas(false);
+		return ventanaOfertas;
+	}
+	
+	public static void setCrearVentanaOfertas(boolean estado){
+		crearVentanaOfertas=estado;
 	}
 }

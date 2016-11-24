@@ -1,19 +1,19 @@
 package logica_negocio;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
-public class Subconjunto {
+
+public class Solucion {
 
 	//variables de instancia
-	private Set<Oferta> _conjOfertas;
+	private ArrayList<Oferta> _ofertas;
 	private Double _dineroTotal;
 	private Double _tiempoTotal;
 	private boolean [] _tiempoRequerido;
 	
 	//constructor
-	public Subconjunto(){
-		_conjOfertas=new HashSet<Oferta>();
+	public Solucion(){
+		_ofertas=new ArrayList<Oferta>();
 		_dineroTotal=0.0;
 		_tiempoTotal=0.0;
 		_tiempoRequerido=new boolean[24];//horas del dia
@@ -23,18 +23,18 @@ public class Subconjunto {
 	public void agregarOfertas(Oferta oferta){
 		_dineroTotal+=oferta.getDinero();//peso total O(1)
 		_tiempoTotal+=oferta.getDemandaHoraria().getTiempo();//O(1)
-		_conjOfertas.add(oferta);
+		_ofertas.add(oferta);
 	}
 	
 	//quitar oferta
 	public void quitarOfertas(Oferta oferta){
 		_dineroTotal-=oferta.getDinero();//peso total O(1)
 		_tiempoTotal-=oferta.getDemandaHoraria().getTiempo();//O(1)
-		_conjOfertas.remove(oferta);
+		_ofertas.remove(oferta);
 	}
 	
-	//mejor ganancia entre subconjuntos
-	public boolean mayorDineroQue(Subconjunto otro){
+	//mejor ganancia entre soluciones
+	public boolean mayorDineroQue(Solucion otro){
 		return this.getDineroTotal()>otro.getDineroTotal();
 	}
 		
@@ -43,8 +43,8 @@ public class Subconjunto {
 		return _dineroTotal;
 	}
 	
-	//mejor tiempo entre subconjuntos
-	public boolean mayorTiempoQue(Subconjunto otro){
+	//mejor tiempo entre soluciones
+	public boolean mayorTiempoQue(Solucion otro){
 		return this.getTiempoTotal()>otro.getTiempoTotal();
 	}
 	
@@ -53,7 +53,7 @@ public class Subconjunto {
 		return _tiempoTotal;
 	}
 
-	//chequea sí una hora(tomando su indice)  
+	//chequea sï¿½ una hora(tomando su indice)  
 	//fue ocupada por alguna oferta
 	public boolean horaOcupada(int indiceHora){
 		return _tiempoRequerido[indiceHora]==true;
@@ -103,12 +103,12 @@ public class Subconjunto {
 			return false;
 		}
 			
-		Subconjunto otro = (Subconjunto) obj;
+		Solucion otro = (Solucion) obj;
 		if(this.getCantOfertas()!=otro.getCantOfertas()){
 			return false;
 		}
 			
-		for(Oferta oferta:_conjOfertas){
+		for(Oferta oferta:_ofertas){
 			if(!otro.contieneOferta(oferta)){
 				return false;
 			}
@@ -117,19 +117,19 @@ public class Subconjunto {
 	}
 	
 	//asegura contencion
-	private boolean contieneOferta(Oferta oferta) {
-		return _conjOfertas.contains(oferta);
+	public boolean contieneOferta(Oferta oferta) {
+		return _ofertas.contains(oferta);
 	}
 
-	//cant de ofertas del subconjunto
+	//cant de ofertas del solucion
 	public int getCantOfertas() {
-		return _conjOfertas.size();
+		return _ofertas.size();
 	}
 	
 	//clonar un conjunto
-	public Subconjunto clonar(){
-		Subconjunto aux=new Subconjunto();
-		for (Oferta oferta : _conjOfertas) {
+	public Solucion clonar(){
+		Solucion aux=new Solucion();
+		for (Oferta oferta : _ofertas) {
 			aux.agregarOfertas(oferta);
 		}
 		return aux;
@@ -139,9 +139,9 @@ public class Subconjunto {
 	@Override
 	public String toString()
 	{	
-		String cadena="Subconjunto de ofertas: \n\n";
+		String cadena="solucion de ofertas: \n\n";
 		
-		for(Oferta oferta:_conjOfertas){
+		for(Oferta oferta:_ofertas){
 			cadena+=oferta.toString();
 		}
 		
@@ -156,5 +156,9 @@ public class Subconjunto {
 			System.out.print(i+"hs: "+_tiempoRequerido[i]+" , ");
 		}
 			System.out.println("]");
+	}
+
+	public Oferta getOferta(int indice) {
+		return _ofertas.get(indice);
 	}
 }
